@@ -1,108 +1,121 @@
-name: mqtt-3interrupt-2relay
+name: mqtt_pump
 type: app
 version: "1.0"
 platform: esp8266
 platforms:
-- cc3200
-- cc3220
 - esp32
 - esp8266
-- stm32
-- ubuntu
 author: mongoose-os
 description: A Mongoose OS app skeleton
 sources:
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/src/main.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/build/gen/mgos_deps_init.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/i2c/src/mgos_i2c_master.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/i2c/src/gpio/gpio_i2c_master.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/atca/src/mgos_atca.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/atca/cryptoauthlib/lib/atca_cfgs.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/atca/cryptoauthlib/lib/atca_command.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/atca/cryptoauthlib/lib/atca_device.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/atca/cryptoauthlib/lib/atca_iface.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/atca/cryptoauthlib/lib/basic/atca_basic.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/atca/cryptoauthlib/lib/basic/atca_helpers.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/atca/cryptoauthlib/lib/host/atca_host.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-common/src/mgos_vfs.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-common/src/mgos_vfs_dev.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-common/src/mgos_vfs_internal.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-common/src/esp8266/esp_flash_writer.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-common/src/esp8266/esp_fs.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-common/src/esp8266/esp_vfs_dev_sysflash.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-dev-part/src/mgos_vfs_dev_part.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-fs-spiffs/src/mgos_vfs_fs_spiffs.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-fs-spiffs/src/spiffs/spiffs_cache.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-fs-spiffs/src/spiffs/spiffs_check.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-fs-spiffs/src/spiffs/spiffs_gc.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-fs-spiffs/src/spiffs/spiffs_hydrogen.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-fs-spiffs/src/spiffs/spiffs_nucleus.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/core/src/mgos_core.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/core/src/esp8266/esp_rboot.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mjs/src/mos_mjs.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/modules/mjs/mjs.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mjs/esp8266/src/esp8266_mjs.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mqtt/src/mgos_mqtt.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/rpc-common/src/mg_rpc.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/rpc-common/src/mg_rpc_channel.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/rpc-common/src/mg_rpc_channel_http.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/rpc-common/src/mgos_rpc.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/rpc-service-config/src/mgos_service_config.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/rpc-service-fs/src/mgos_service_filesystem.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/rpc-uart/src/mgos_rpc_channel_uart.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/wifi/src/mgos_wifi.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/wifi/src/mjs_wifi.c
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/wifi/esp8266/src/esp_wifi.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/src/main.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/build/gen/mgos_deps_init.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/adc/esp8266/src/esp_adc.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/i2c/src/mgos_i2c_master.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/i2c/src/gpio/gpio_i2c_master.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/atca/src/mgos_atca.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/atca/cryptoauthlib/lib/atca_cfgs.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/atca/cryptoauthlib/lib/atca_command.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/atca/cryptoauthlib/lib/atca_device.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/atca/cryptoauthlib/lib/atca_iface.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/atca/cryptoauthlib/lib/basic/atca_basic.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/atca/cryptoauthlib/lib/basic/atca_helpers.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/atca/cryptoauthlib/lib/host/atca_host.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-common/src/mgos_vfs.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-common/src/mgos_vfs_dev.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-common/src/mgos_vfs_internal.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-common/src/esp8266/esp_flash_writer.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-common/src/esp8266/esp_fs.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-common/src/esp8266/esp_vfs_dev_sysflash.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-dev-part/src/mgos_vfs_dev_part.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-fs-spiffs/src/mgos_vfs_fs_spiffs.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-fs-spiffs/src/spiffs/spiffs_cache.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-fs-spiffs/src/spiffs/spiffs_check.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-fs-spiffs/src/spiffs/spiffs_gc.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-fs-spiffs/src/spiffs/spiffs_hydrogen.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-fs-spiffs/src/spiffs/spiffs_nucleus.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/core/src/mgos_core.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/core/src/esp8266/esp_rboot.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/http-server/src/mgos_http_server.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mjs/src/mos_mjs.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/modules/mjs/mjs.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mjs/esp8266/src/esp8266_mjs.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mqtt/src/mgos_mqtt.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/provision/src/mgos_provision.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/provision/src/mgos_provision_btn.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/provision/src/mgos_provision_led.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/provision/src/mgos_provision_state.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/rpc-common/src/mg_rpc.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/rpc-common/src/mg_rpc_channel.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/rpc-common/src/mg_rpc_channel_http.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/rpc-common/src/mgos_rpc.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/rpc-service-config/src/mgos_service_config.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/rpc-service-fs/src/mgos_service_filesystem.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/wifi/src/mgos_wifi.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/wifi/src/mjs_wifi.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/wifi/esp8266/src/esp_wifi.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/rpc-service-wifi/src/mgos_rpc_service_wifi.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/rpc-uart/src/mgos_rpc_channel_uart.c
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/sntp/src/mgos_sntp.c
 includes:
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/i2c/include
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/atca/include
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/atca/cryptoauthlib/lib
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mbedtls/include
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mbedtls/include/esp8266
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mbedtls/mbedtls/include
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-common/include
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-common/include/esp8266
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mongoose/include
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-dev-part/include
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-fs-spiffs/include
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-fs-spiffs/include/spiffs
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-fs-spiffs/include/esp8266
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/core/include
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/core/include/esp8266
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mjs/include
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mqtt/include
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/rpc-common/include
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/rpc-service-config/include
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/rpc-service-fs/include
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/rpc-uart/include
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/wifi/include
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/adc/include
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/adc/esp8266/include
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/i2c/include
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/atca/include
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/atca/cryptoauthlib/lib
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mbedtls/include
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mbedtls/include/esp8266
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mbedtls/mbedtls/include
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-common/include
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-common/include/esp8266
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mongoose/include
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-dev-part/include
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-fs-spiffs/include
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-fs-spiffs/include/spiffs
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-fs-spiffs/include/esp8266
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/core/include
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/core/include/esp8266
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/http-server/include
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mjs/include
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mqtt/include
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/provision/include
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/rpc-common/include
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/rpc-service-config/include
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/rpc-service-fs/include
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/wifi/include
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/rpc-uart/include
 filesystem:
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/ca-bundle/fs/ca.pem
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mjs/fs/api_bitbang.js
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mjs/fs/api_config.js
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mjs/fs/api_events.js
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mjs/fs/api_gpio.js
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mjs/fs/api_http.js
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mjs/fs/api_log.js
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mjs/fs/api_net.js
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mjs/fs/api_sys.js
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mjs/fs/api_timer.js
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mjs/fs/api_uart.js
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mjs/fs/init.js
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/modules/mjs/mjs/lib/api_dataview.js
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/modules/mjs/mjs/lib/api_file.js
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/modules/mjs/mjs/lib/api_math.js
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/i2c/mjs_fs/api_i2c.js
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mqtt/mjs_fs/api_mqtt.js
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/rpc-common/mjs_fs/api_rpc.js
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/wifi/mjs_fs/api_wifi.js
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mjs/esp8266/fs/api_arch_uart.js
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mjs/esp8266/fs/api_esp8266.js
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/fs/index.html
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/fs/init.js
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/ca-bundle/fs/ca.pem
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mjs/fs/api_bitbang.js
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mjs/fs/api_config.js
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mjs/fs/api_events.js
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mjs/fs/api_gpio.js
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mjs/fs/api_http.js
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mjs/fs/api_log.js
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mjs/fs/api_net.js
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mjs/fs/api_sys.js
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mjs/fs/api_timer.js
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mjs/fs/api_uart.js
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mjs/fs/init.js
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/modules/mjs/mjs/lib/api_dataview.js
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/modules/mjs/mjs/lib/api_file.js
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/modules/mjs/mjs/lib/api_math.js
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/adc/mjs_fs/api_adc.js
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/i2c/mjs_fs/api_i2c.js
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mqtt/mjs_fs/api_mqtt.js
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/rpc-common/mjs_fs/api_rpc.js
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/wifi/mjs_fs/api_wifi.js
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mjs/esp8266/fs/api_arch_uart.js
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mjs/esp8266/fs/api_esp8266.js
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/fs/.vscode
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/fs/index.html
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/fs/init.js
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/fs/zepto.min.js
 binary_libs:
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/build/objs/libmbedtls-esp8266-2.12.1.a
-- /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/build/objs/libmongoose-esp8266-2.12.1.a
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/build/objs/libmbedtls-esp8266-2.12.1.a
+- /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/build/objs/libmongoose-esp8266-2.12.1.a
+ffi_symbols:
+- mgos_*s
 modules:
 - origin: https://github.com/cesanta/mjs
   location: https://github.com/cesanta/mjs
@@ -154,6 +167,43 @@ config_schema:
   - i
   - 1
   - title: mbedTLS debug level
+- - http
+  - o
+  - title: HTTP Server
+- - http.enable
+  - b
+  - true
+  - title: Enable HTTP Server
+- - http.listen_addr
+  - s
+  - "80"
+  - title: Listening port / address
+- - http.document_root
+  - s
+  - /
+  - title: Root for serving files. Setting to empty disables file serving.
+- - http.ssl_cert
+  - s
+  - title: Turn on SSL on the listener, use this cert
+- - http.ssl_key
+  - s
+  - title: SSL key to use
+- - http.ssl_ca_cert
+  - s
+  - title: Verify clients this CA bundle
+- - http.upload_acl
+  - s
+  - '*'
+  - title: Upload file ACL
+- - http.hidden_files
+  - s
+  - title: Hidden file pattern
+- - http.auth_domain
+  - s
+  - title: Enable authentication of all HTTP requests
+- - http.auth_file
+  - s
+  - title: Password file to use for auth
 - - mjs
   - o
   - title: mJS settings
@@ -259,6 +309,46 @@ config_schema:
   - s
   - ""
   - title: MQTT topic to publish STDERR to
+- - provision
+  - o
+  - title: Provision library settings
+- - provision.btn
+  - o
+  - title: Reset button settings
+- - provision.btn.pin
+  - i
+  - -1
+  - title: Reset button GPIO pin
+- - provision.btn.pull_up
+  - b
+  - false
+  - title: True if button is pulled up when inactive
+- - provision.btn.hold_ms
+  - i
+  - 0
+  - title: Hold interval in milliseconds. -1 to disable, 0 to reset if held on boot,
+      > 0 to reset if held at runtime for this long.
+- - provision.led.pin
+  - i
+  - -1
+  - title: LED GPIO pin. If >= 0, LED blinking will indicate current state.
+- - provision.led.active_high
+  - b
+  - true
+  - title: True if LED is on when output is high (1)
+- - provision.stable_state
+  - i
+  - 3
+  - title: A stable state, beyond which reset will not happen. Se to 0 to disable
+      reset.
+- - provision.timeout
+  - i
+  - 300
+  - title: Maximum time since boot allowed to reach stable state
+- - provision.max_state
+  - i
+  - 0
+  - title: Maximum state reached so far
 - - rpc
   - o
   - title: RPC settings
@@ -287,25 +377,6 @@ config_schema:
 - - rpc.auth_file
   - s
   - title: File with user credentials in the htdigest format
-- - rpc.uart
-  - o
-  - title: RPC-over-UART settings
-- - rpc.uart.uart_no
-  - i
-  - 0
-  - title: UART number (-1 to disable)
-- - rpc.uart.baud_rate
-  - i
-  - 115200
-  - title: Baud rate
-- - rpc.uart.fc_type
-  - i
-  - 2
-  - title: 'Flow control: 0 - none, 1 - CTS/RTS, 2 - XON/XOFF'
-- - rpc.uart.dst
-  - s
-  - ""
-  - title: Destination reachable via this channel
 - - wifi
   - o
   - hide: true
@@ -435,6 +506,48 @@ config_schema:
   - b
   - true
   - title: Keep AP enabled when station is on
+- - rpc.uart
+  - o
+  - title: RPC-over-UART settings
+- - rpc.uart.uart_no
+  - i
+  - 0
+  - title: UART number (-1 to disable)
+- - rpc.uart.baud_rate
+  - i
+  - 115200
+  - title: Baud rate
+- - rpc.uart.fc_type
+  - i
+  - 2
+  - title: 'Flow control: 0 - none, 1 - CTS/RTS, 2 - XON/XOFF'
+- - rpc.uart.dst
+  - s
+  - ""
+  - title: Destination reachable via this channel
+- - sntp
+  - o
+  - title: SNTP settings
+- - sntp.enable
+  - b
+  - true
+  - title: Enable SNTP
+- - sntp.server
+  - s
+  - time.google.com
+  - title: Server address
+- - sntp.retry_min
+  - i
+  - 1
+  - title: Minimum retry interval
+- - sntp.retry_max
+  - i
+  - 30
+  - title: Maximum retry interval
+- - sntp.update_interval
+  - i
+  - 7200
+  - title: Update interval. If 0, performs a one-off sync
 - - board
   - o
   - title: Board layout configuration
@@ -511,48 +624,105 @@ config_schema:
 - - mqtt.server
   - m16.cloudmqtt.com:15570
 - - wifi.sta.enable
+  - false
+- - wifi.ap.enable
   - true
-- - wifi.sta.ssid
-  - smps
-- - wifi.sta.pass
-  - 432FACC99A
+- - wifi.ap.ip
+  - 192.168.4.1
+- - wifi.ap.ssid
+  - Preesu_??????
+- - wifi.ap.pass
+  - "12345678"
+- - device.firmware
+  - s
+  - "1.2"
+  - title: device firmware
+- - device.hardware
+  - s
+  - pump
+  - title: device hardware
+- - device.ota_url
+  - s
+  - www.zyx.com
+  - title: OTA utl
+- - device.new_firmware
+  - s
+  - "55555"
+  - title: new firmware
+- - device.subscription
+  - b
+  - false
+  - title: device subsciption
 - - hardware
   - o
+  - title: Hardware configurations
+- - hardware.pin
+  - o
   - title: Hardware pin mappings
-- - hardware.input1
+- - hardware.pin.voltage
   - i
   - 12
-  - title: input pin1
-- - hardware.input2
+  - title: Voltage fault pin
+- - hardware.pin.thermal
   - i
   - 13
-  - title: input pin2
-- - hardware.input3
+  - title: Thermal fault pin
+- - hardware.pin.contactor
   - i
   - 14
-  - title: input pin3
-- - hardware.relay1
+  - title: Contactor status pin
+- - hardware.pin.on_relay
   - i
   - 4
-  - title: relay pin1
-- - hardware.relay2
+  - title: Pump on pin
+- - hardware.pin.off_relay
   - i
   - 5
-  - title: relay pin1
+  - title: Pump off pin
+- - hardware.timer
+  - o
+  - title: Hardware timer configs
+- - hardware.timer.telemetry
+  - i
+  - 300000
+  - title: Interval for telemetry update
+- - hardware.timer.pulse
+  - i
+  - 1000
+  - title: Pulse width for pump on/off relay
+- - provision.btn.pin
+  - 0
+- - provision.btn.pull_up
+  - true
+- - provision.btn.hold_ms
+  - 5000
+- - provision.led.pin
+  - 16
+- - provision.led.active_high
+  - false
+- - provision.stable_state
+  - 3
+- - provision.timeout
+  - 3000
 build_vars:
   BOARD: ""
+  MGOS_HAVE_ADC: "1"
   MGOS_HAVE_ATCA: "1"
   MGOS_HAVE_CA_BUNDLE: "1"
   MGOS_HAVE_CORE: "1"
+  MGOS_HAVE_HTTP_SERVER: "1"
   MGOS_HAVE_I2C: "1"
   MGOS_HAVE_MBEDTLS: "1"
   MGOS_HAVE_MJS: "1"
   MGOS_HAVE_MONGOOSE: "1"
   MGOS_HAVE_MQTT: "1"
+  MGOS_HAVE_PROVISION: "1"
   MGOS_HAVE_RPC_COMMON: "1"
   MGOS_HAVE_RPC_SERVICE_CONFIG: "1"
   MGOS_HAVE_RPC_SERVICE_FS: "1"
+  MGOS_HAVE_RPC_SERVICE_WIFI: "1"
   MGOS_HAVE_RPC_UART: "1"
+  MGOS_HAVE_SNTP: "1"
   MGOS_HAVE_VFS_COMMON: "1"
   MGOS_HAVE_VFS_DEV_PART: "1"
   MGOS_HAVE_VFS_FS_SPIFFS: "1"
@@ -570,20 +740,27 @@ cdefs:
   MG_ENABLE_SSL: "1"
   MG_SSL_IF: MG_SSL_IF_MBEDTLS
   MG_SSL_IF_MBEDTLS_FREE_CERTS: "1"
+  MGOS_ENABLE_FILE_UPLOAD: "1"
   MGOS_ENABLE_RPC_CHANNEL_HTTP: "1"
   MGOS_ENABLE_SYS_SERVICE: "1"
+  MGOS_ENABLE_WEB_CONFIG: "0"
+  MGOS_HAVE_ADC: "1"
   MGOS_HAVE_ATCA: "1"
   MGOS_HAVE_CA_BUNDLE: "1"
   MGOS_HAVE_CORE: "1"
+  MGOS_HAVE_HTTP_SERVER: "1"
   MGOS_HAVE_I2C: "1"
   MGOS_HAVE_MBEDTLS: "1"
   MGOS_HAVE_MJS: "1"
   MGOS_HAVE_MONGOOSE: "1"
   MGOS_HAVE_MQTT: "1"
+  MGOS_HAVE_PROVISION: "1"
   MGOS_HAVE_RPC_COMMON: "1"
   MGOS_HAVE_RPC_SERVICE_CONFIG: "1"
   MGOS_HAVE_RPC_SERVICE_FS: "1"
+  MGOS_HAVE_RPC_SERVICE_WIFI: "1"
   MGOS_HAVE_RPC_UART: "1"
+  MGOS_HAVE_SNTP: "1"
   MGOS_HAVE_VFS_COMMON: "1"
   MGOS_HAVE_VFS_DEV_PART: "1"
   MGOS_HAVE_VFS_FS_SPIFFS: "1"
@@ -598,190 +775,248 @@ mongoose_os_version: 2.12.1
 manifest_version: "2017-09-29"
 libs_handled:
 - lib:
-    origin: https://github.com/mongoose-os-libs/i2c
-    location: https://github.com/mongoose-os-libs/i2c
-    name: i2c
-  path: /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/i2c
+    origin: https://github.com/mongoose-os-libs/adc
+    location: https://github.com/mongoose-os-libs/adc
+    name: adc
+  path: /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/adc
   init_deps:
   - core
   sources:
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/i2c/src/mgos_i2c_master.c
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/i2c/src/gpio/gpio_i2c_master.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/adc/esp8266/src/esp_adc.c
+- lib:
+    origin: https://github.com/mongoose-os-libs/i2c
+    location: https://github.com/mongoose-os-libs/i2c
+    name: i2c
+  path: /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/i2c
+  init_deps:
+  - core
+  sources:
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/i2c/src/mgos_i2c_master.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/i2c/src/gpio/gpio_i2c_master.c
 - lib:
     origin: https://github.com/mongoose-os-libs/atca
     location: https://github.com/mongoose-os-libs/atca
     name: atca
-  path: /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/atca
+  path: /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/atca
   init_deps:
   - i2c
   sources:
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/atca/src/mgos_atca.c
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/atca/cryptoauthlib/lib/atca_cfgs.c
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/atca/cryptoauthlib/lib/atca_command.c
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/atca/cryptoauthlib/lib/atca_device.c
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/atca/cryptoauthlib/lib/atca_iface.c
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/atca/cryptoauthlib/lib/basic/atca_basic.c
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/atca/cryptoauthlib/lib/basic/atca_helpers.c
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/atca/cryptoauthlib/lib/host/atca_host.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/atca/src/mgos_atca.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/atca/cryptoauthlib/lib/atca_cfgs.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/atca/cryptoauthlib/lib/atca_command.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/atca/cryptoauthlib/lib/atca_device.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/atca/cryptoauthlib/lib/atca_iface.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/atca/cryptoauthlib/lib/basic/atca_basic.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/atca/cryptoauthlib/lib/basic/atca_helpers.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/atca/cryptoauthlib/lib/host/atca_host.c
 - lib:
     origin: https://github.com/mongoose-os-libs/mbedtls
     location: https://github.com/mongoose-os-libs/mbedtls
     name: mbedtls
-  path: /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mbedtls
+  path: /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mbedtls
 - lib:
     origin: https://github.com/mongoose-os-libs/vfs-common
     location: https://github.com/mongoose-os-libs/vfs-common
     name: vfs-common
-  path: /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-common
+  path: /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-common
   sources:
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-common/src/mgos_vfs.c
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-common/src/mgos_vfs_dev.c
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-common/src/mgos_vfs_internal.c
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-common/src/esp8266/esp_flash_writer.c
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-common/src/esp8266/esp_fs.c
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-common/src/esp8266/esp_vfs_dev_sysflash.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-common/src/mgos_vfs.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-common/src/mgos_vfs_dev.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-common/src/mgos_vfs_internal.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-common/src/esp8266/esp_flash_writer.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-common/src/esp8266/esp_fs.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-common/src/esp8266/esp_vfs_dev_sysflash.c
 - lib:
     origin: https://github.com/mongoose-os-libs/mongoose
     location: https://github.com/mongoose-os-libs/mongoose
     name: mongoose
-  path: /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mongoose
+  path: /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mongoose
 - lib:
     origin: https://github.com/mongoose-os-libs/vfs-dev-part
     location: https://github.com/mongoose-os-libs/vfs-dev-part
     name: vfs-dev-part
-  path: /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-dev-part
+  path: /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-dev-part
   init_deps:
   - vfs-common
   sources:
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-dev-part/src/mgos_vfs_dev_part.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-dev-part/src/mgos_vfs_dev_part.c
 - lib:
     origin: https://github.com/mongoose-os-libs/vfs-fs-spiffs
     location: https://github.com/mongoose-os-libs/vfs-fs-spiffs
     name: vfs-fs-spiffs
-  path: /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-fs-spiffs
+  path: /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-fs-spiffs
   init_deps:
   - vfs-common
   sources:
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-fs-spiffs/src/mgos_vfs_fs_spiffs.c
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-fs-spiffs/src/spiffs/spiffs_cache.c
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-fs-spiffs/src/spiffs/spiffs_check.c
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-fs-spiffs/src/spiffs/spiffs_gc.c
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-fs-spiffs/src/spiffs/spiffs_hydrogen.c
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/vfs-fs-spiffs/src/spiffs/spiffs_nucleus.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-fs-spiffs/src/mgos_vfs_fs_spiffs.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-fs-spiffs/src/spiffs/spiffs_cache.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-fs-spiffs/src/spiffs/spiffs_check.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-fs-spiffs/src/spiffs/spiffs_gc.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-fs-spiffs/src/spiffs/spiffs_hydrogen.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/vfs-fs-spiffs/src/spiffs/spiffs_nucleus.c
 - lib:
     origin: https://github.com/mongoose-os-libs/core
     location: https://github.com/mongoose-os-libs/core
     name: core
-  path: /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/core
+  path: /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/core
   init_deps:
   - mongoose
   - vfs-common
   - vfs-dev-part
   - vfs-fs-spiffs
   sources:
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/core/src/mgos_core.c
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/core/src/esp8266/esp_rboot.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/core/src/mgos_core.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/core/src/esp8266/esp_rboot.c
 - lib:
     origin: https://github.com/mongoose-os-libs/ca-bundle
     location: https://github.com/mongoose-os-libs/ca-bundle
     name: ca-bundle
-  path: /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/ca-bundle
+  path: /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/ca-bundle
   init_deps:
   - core
+- lib:
+    origin: https://github.com/mongoose-os-libs/http-server
+    location: https://github.com/mongoose-os-libs/http-server
+    name: http-server
+  path: /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/http-server
+  init_deps:
+  - atca
+  - core
+  - wifi
+  sources:
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/http-server/src/mgos_http_server.c
 - lib:
     origin: https://github.com/mongoose-os-libs/mjs
     location: https://github.com/mongoose-os-libs/mjs
     name: mjs
-  path: /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mjs
+  path: /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mjs
   init_deps:
   - core
   sources:
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mjs/src/mos_mjs.c
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/modules/mjs/mjs.c
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mjs/esp8266/src/esp8266_mjs.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mjs/src/mos_mjs.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/modules/mjs/mjs.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mjs/esp8266/src/esp8266_mjs.c
 - lib:
     origin: https://github.com/mongoose-os-libs/mqtt
     location: https://github.com/mongoose-os-libs/mqtt
     name: mqtt
-  path: /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mqtt
+  path: /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mqtt
   init_deps:
   - core
   sources:
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/mqtt/src/mgos_mqtt.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/mqtt/src/mgos_mqtt.c
+- lib:
+    origin: https://github.com/mongoose-os-libs/provision
+    location: https://github.com/mongoose-os-libs/provision
+    name: provision
+  path: /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/provision
+  init_deps:
+  - core
+  sources:
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/provision/src/mgos_provision.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/provision/src/mgos_provision_btn.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/provision/src/mgos_provision_led.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/provision/src/mgos_provision_state.c
 - lib:
     origin: https://github.com/mongoose-os-libs/rpc-common
     location: https://github.com/mongoose-os-libs/rpc-common
     name: rpc-common
-  path: /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/rpc-common
+  path: /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/rpc-common
   init_deps:
   - core
+  - http-server
   - mongoose
   sources:
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/rpc-common/src/mg_rpc.c
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/rpc-common/src/mg_rpc_channel.c
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/rpc-common/src/mg_rpc_channel_http.c
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/rpc-common/src/mgos_rpc.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/rpc-common/src/mg_rpc.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/rpc-common/src/mg_rpc_channel.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/rpc-common/src/mg_rpc_channel_http.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/rpc-common/src/mgos_rpc.c
 - lib:
     origin: https://github.com/mongoose-os-libs/rpc-service-config
     location: https://github.com/mongoose-os-libs/rpc-service-config
     name: rpc-service-config
-  path: /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/rpc-service-config
+  path: /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/rpc-service-config
   init_deps:
   - core
   - rpc-common
   sources:
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/rpc-service-config/src/mgos_service_config.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/rpc-service-config/src/mgos_service_config.c
 - lib:
     origin: https://github.com/mongoose-os-libs/rpc-service-fs
     location: https://github.com/mongoose-os-libs/rpc-service-fs
     name: rpc-service-fs
-  path: /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/rpc-service-fs
+  path: /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/rpc-service-fs
   init_deps:
   - core
   - rpc-common
   sources:
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/rpc-service-fs/src/mgos_service_filesystem.c
-- lib:
-    origin: https://github.com/mongoose-os-libs/rpc-uart
-    location: https://github.com/mongoose-os-libs/rpc-uart
-    name: rpc-uart
-  path: /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/rpc-uart
-  init_deps:
-  - core
-  - rpc-common
-  sources:
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/rpc-uart/src/mgos_rpc_channel_uart.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/rpc-service-fs/src/mgos_service_filesystem.c
 - lib:
     origin: https://github.com/mongoose-os-libs/wifi
     location: https://github.com/mongoose-os-libs/wifi
     name: wifi
-  path: /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/wifi
+  path: /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/wifi
   init_deps:
   - core
   sources:
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/wifi/src/mgos_wifi.c
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/wifi/src/mjs_wifi.c
-  - /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/wifi/esp8266/src/esp_wifi.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/wifi/src/mgos_wifi.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/wifi/src/mjs_wifi.c
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/wifi/esp8266/src/esp_wifi.c
+- lib:
+    origin: https://github.com/mongoose-os-libs/rpc-service-wifi
+    location: https://github.com/mongoose-os-libs/rpc-service-wifi
+    name: rpc-service-wifi
+  path: /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/rpc-service-wifi
+  init_deps:
+  - core
+  - rpc-common
+  - wifi
+  sources:
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/rpc-service-wifi/src/mgos_rpc_service_wifi.c
+- lib:
+    origin: https://github.com/mongoose-os-libs/rpc-uart
+    location: https://github.com/mongoose-os-libs/rpc-uart
+    name: rpc-uart
+  path: /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/rpc-uart
+  init_deps:
+  - core
+  - rpc-common
+  sources:
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/rpc-uart/src/mgos_rpc_channel_uart.c
+- lib:
+    origin: https://github.com/mongoose-os-libs/sntp
+    location: https://github.com/mongoose-os-libs/sntp
+    name: sntp
+  path: /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/sntp
+  init_deps:
+  - core
+  sources:
+  - /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/sntp/src/mgos_sntp.c
 - lib:
     origin: https://github.com/mongoose-os-libs/boards
     location: https://github.com/mongoose-os-libs/boards
     name: zz_boards
-  path: /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/deps/boards
+  path: /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/deps/boards
 init_deps:
 - mongoose
 - vfs-common
 - vfs-dev-part
 - vfs-fs-spiffs
 - core
+- adc
 - i2c
 - atca
 - ca-bundle
+- wifi
+- http-server
 - mbedtls
 - mjs
 - mqtt
+- provision
 - rpc-common
 - rpc-service-config
 - rpc-service-fs
+- rpc-service-wifi
 - rpc-uart
-- wifi
+- sntp
 - zz_boards

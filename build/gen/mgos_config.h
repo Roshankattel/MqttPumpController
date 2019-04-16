@@ -1,7 +1,7 @@
 /* clang-format off */
 /*
  * Generated file - do not edit.
- * Command: /mongoose-os/fw/tools/gen_sys_config.py --c_name=mgos_config --c_global_name=mgos_sys_config --dest_dir=/data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/build/gen/ /mongoose-os/fw/src/mgos_debug_udp_config.yaml /mongoose-os/fw/src/mgos_sys_config.yaml /mongoose-os/fw/platforms/esp8266/src/esp_sys_config.yaml /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/build/gen/mos_conf_schema.yml
+ * Command: /mongoose-os/fw/tools/gen_sys_config.py --c_name=mgos_config --c_global_name=mgos_sys_config --dest_dir=/data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/build/gen/ /mongoose-os/fw/src/mgos_debug_udp_config.yaml /mongoose-os/fw/src/mgos_sys_config.yaml /mongoose-os/fw/platforms/esp8266/src/esp_sys_config.yaml /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/build/gen/mos_conf_schema.yml
  */
 
 #pragma once
@@ -28,6 +28,11 @@ struct mgos_config_debug {
 struct mgos_config_device {
   char *id;
   char *license;
+  char *firmware;
+  char *hardware;
+  char *ota_url;
+  char *new_firmware;
+  int subscription;
 };
 
 struct mgos_config_sys_mount {
@@ -61,6 +66,19 @@ struct mgos_config_i2c {
   int scl_gpio;
 };
 
+struct mgos_config_http {
+  int enable;
+  char *listen_addr;
+  char *document_root;
+  char *ssl_cert;
+  char *ssl_key;
+  char *ssl_ca_cert;
+  char *upload_acl;
+  char *hidden_files;
+  char *auth_domain;
+  char *auth_file;
+};
+
 struct mgos_config_mjs {
   int generate_jsc;
 };
@@ -87,6 +105,25 @@ struct mgos_config_mqtt {
   int recv_mbuf_limit;
   int require_time;
   int cloud_events;
+};
+
+struct mgos_config_provision_btn {
+  int pin;
+  int pull_up;
+  int hold_ms;
+};
+
+struct mgos_config_provision_led {
+  int pin;
+  int active_high;
+};
+
+struct mgos_config_provision {
+  struct mgos_config_provision_btn btn;
+  struct mgos_config_provision_led led;
+  int stable_state;
+  int timeout;
+  int max_state;
 };
 
 struct mgos_config_rpc_uart {
@@ -150,6 +187,14 @@ struct mgos_config_wifi {
   int sta_connect_timeout;
 };
 
+struct mgos_config_sntp {
+  int enable;
+  char *server;
+  int retry_min;
+  int retry_max;
+  int update_interval;
+};
+
 struct mgos_config_board_led1 {
   int pin;
   int active_high;
@@ -189,12 +234,22 @@ struct mgos_config_board {
   struct mgos_config_board_btn3 btn3;
 };
 
+struct mgos_config_hardware_pin {
+  int voltage;
+  int thermal;
+  int contactor;
+  int on_relay;
+  int off_relay;
+};
+
+struct mgos_config_hardware_timer {
+  int telemetry;
+  int pulse;
+};
+
 struct mgos_config_hardware {
-  int input1;
-  int input2;
-  int input3;
-  int relay1;
-  int relay2;
+  struct mgos_config_hardware_pin pin;
+  struct mgos_config_hardware_timer timer;
 };
 
 struct mgos_config {
@@ -203,11 +258,14 @@ struct mgos_config {
   struct mgos_config_sys sys;
   char *conf_acl;
   struct mgos_config_i2c i2c;
+  struct mgos_config_http http;
   struct mgos_config_mjs mjs;
   struct mgos_config_mqtt mqtt;
   struct mgos_config_mqtt mqtt1;
+  struct mgos_config_provision provision;
   struct mgos_config_rpc rpc;
   struct mgos_config_wifi wifi;
+  struct mgos_config_sntp sntp;
   struct mgos_config_board board;
   struct mgos_config_hardware hardware;
 };
@@ -244,6 +302,16 @@ const struct mgos_config_device *mgos_config_get_device(struct mgos_config *cfg)
 const char *mgos_config_get_device_id(struct mgos_config *cfg);
 #define MGOS_CONFIG_HAVE_DEVICE_LICENSE
 const char *mgos_config_get_device_license(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_DEVICE_FIRMWARE
+const char *mgos_config_get_device_firmware(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_DEVICE_HARDWARE
+const char *mgos_config_get_device_hardware(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_DEVICE_OTA_URL
+const char *mgos_config_get_device_ota_url(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_DEVICE_NEW_FIRMWARE
+const char *mgos_config_get_device_new_firmware(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_DEVICE_SUBSCRIPTION
+int         mgos_config_get_device_subscription(struct mgos_config *cfg);
 #define MGOS_CONFIG_HAVE_SYS
 const struct mgos_config_sys *mgos_config_get_sys(struct mgos_config *cfg);
 #define MGOS_CONFIG_HAVE_SYS_MOUNT
@@ -288,6 +356,28 @@ int         mgos_config_get_i2c_debug(struct mgos_config *cfg);
 int         mgos_config_get_i2c_sda_gpio(struct mgos_config *cfg);
 #define MGOS_CONFIG_HAVE_I2C_SCL_GPIO
 int         mgos_config_get_i2c_scl_gpio(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_HTTP
+const struct mgos_config_http *mgos_config_get_http(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_HTTP_ENABLE
+int         mgos_config_get_http_enable(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_HTTP_LISTEN_ADDR
+const char *mgos_config_get_http_listen_addr(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_HTTP_DOCUMENT_ROOT
+const char *mgos_config_get_http_document_root(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_HTTP_SSL_CERT
+const char *mgos_config_get_http_ssl_cert(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_HTTP_SSL_KEY
+const char *mgos_config_get_http_ssl_key(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_HTTP_SSL_CA_CERT
+const char *mgos_config_get_http_ssl_ca_cert(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_HTTP_UPLOAD_ACL
+const char *mgos_config_get_http_upload_acl(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_HTTP_HIDDEN_FILES
+const char *mgos_config_get_http_hidden_files(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_HTTP_AUTH_DOMAIN
+const char *mgos_config_get_http_auth_domain(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_HTTP_AUTH_FILE
+const char *mgos_config_get_http_auth_file(struct mgos_config *cfg);
 #define MGOS_CONFIG_HAVE_MJS
 const struct mgos_config_mjs *mgos_config_get_mjs(struct mgos_config *cfg);
 #define MGOS_CONFIG_HAVE_MJS_GENERATE_JSC
@@ -380,6 +470,28 @@ int         mgos_config_get_mqtt1_recv_mbuf_limit(struct mgos_config *cfg);
 int         mgos_config_get_mqtt1_require_time(struct mgos_config *cfg);
 #define MGOS_CONFIG_HAVE_MQTT1_CLOUD_EVENTS
 int         mgos_config_get_mqtt1_cloud_events(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_PROVISION
+const struct mgos_config_provision *mgos_config_get_provision(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_PROVISION_BTN
+const struct mgos_config_provision_btn *mgos_config_get_provision_btn(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_PROVISION_BTN_PIN
+int         mgos_config_get_provision_btn_pin(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_PROVISION_BTN_PULL_UP
+int         mgos_config_get_provision_btn_pull_up(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_PROVISION_BTN_HOLD_MS
+int         mgos_config_get_provision_btn_hold_ms(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_PROVISION_LED
+const struct mgos_config_provision_led *mgos_config_get_provision_led(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_PROVISION_LED_PIN
+int         mgos_config_get_provision_led_pin(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_PROVISION_LED_ACTIVE_HIGH
+int         mgos_config_get_provision_led_active_high(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_PROVISION_STABLE_STATE
+int         mgos_config_get_provision_stable_state(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_PROVISION_TIMEOUT
+int         mgos_config_get_provision_timeout(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_PROVISION_MAX_STATE
+int         mgos_config_get_provision_max_state(struct mgos_config *cfg);
 #define MGOS_CONFIG_HAVE_RPC
 const struct mgos_config_rpc *mgos_config_get_rpc(struct mgos_config *cfg);
 #define MGOS_CONFIG_HAVE_RPC_ENABLE
@@ -528,6 +640,18 @@ const char *mgos_config_get_wifi_sta2_dhcp_hostname(struct mgos_config *cfg);
 int         mgos_config_get_wifi_sta_cfg_idx(struct mgos_config *cfg);
 #define MGOS_CONFIG_HAVE_WIFI_STA_CONNECT_TIMEOUT
 int         mgos_config_get_wifi_sta_connect_timeout(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_SNTP
+const struct mgos_config_sntp *mgos_config_get_sntp(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_SNTP_ENABLE
+int         mgos_config_get_sntp_enable(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_SNTP_SERVER
+const char *mgos_config_get_sntp_server(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_SNTP_RETRY_MIN
+int         mgos_config_get_sntp_retry_min(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_SNTP_RETRY_MAX
+int         mgos_config_get_sntp_retry_max(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_SNTP_UPDATE_INTERVAL
+int         mgos_config_get_sntp_update_interval(struct mgos_config *cfg);
 #define MGOS_CONFIG_HAVE_BOARD
 const struct mgos_config_board *mgos_config_get_board(struct mgos_config *cfg);
 #define MGOS_CONFIG_HAVE_BOARD_LED1
@@ -568,16 +692,24 @@ int         mgos_config_get_board_btn3_pin(struct mgos_config *cfg);
 int         mgos_config_get_board_btn3_pull_up(struct mgos_config *cfg);
 #define MGOS_CONFIG_HAVE_HARDWARE
 const struct mgos_config_hardware *mgos_config_get_hardware(struct mgos_config *cfg);
-#define MGOS_CONFIG_HAVE_HARDWARE_INPUT1
-int         mgos_config_get_hardware_input1(struct mgos_config *cfg);
-#define MGOS_CONFIG_HAVE_HARDWARE_INPUT2
-int         mgos_config_get_hardware_input2(struct mgos_config *cfg);
-#define MGOS_CONFIG_HAVE_HARDWARE_INPUT3
-int         mgos_config_get_hardware_input3(struct mgos_config *cfg);
-#define MGOS_CONFIG_HAVE_HARDWARE_RELAY1
-int         mgos_config_get_hardware_relay1(struct mgos_config *cfg);
-#define MGOS_CONFIG_HAVE_HARDWARE_RELAY2
-int         mgos_config_get_hardware_relay2(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_HARDWARE_PIN
+const struct mgos_config_hardware_pin *mgos_config_get_hardware_pin(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_HARDWARE_PIN_VOLTAGE
+int         mgos_config_get_hardware_pin_voltage(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_HARDWARE_PIN_THERMAL
+int         mgos_config_get_hardware_pin_thermal(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_HARDWARE_PIN_CONTACTOR
+int         mgos_config_get_hardware_pin_contactor(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_HARDWARE_PIN_ON_RELAY
+int         mgos_config_get_hardware_pin_on_relay(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_HARDWARE_PIN_OFF_RELAY
+int         mgos_config_get_hardware_pin_off_relay(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_HARDWARE_TIMER
+const struct mgos_config_hardware_timer *mgos_config_get_hardware_timer(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_HARDWARE_TIMER_TELEMETRY
+int         mgos_config_get_hardware_timer_telemetry(struct mgos_config *cfg);
+#define MGOS_CONFIG_HAVE_HARDWARE_TIMER_PULSE
+int         mgos_config_get_hardware_timer_pulse(struct mgos_config *cfg);
 
 void mgos_config_set_debug_udp_log_addr(struct mgos_config *cfg, const char *val);
 void mgos_config_set_debug_level(struct mgos_config *cfg, int         val);
@@ -591,6 +723,11 @@ void mgos_config_set_debug_stdout_topic(struct mgos_config *cfg, const char *val
 void mgos_config_set_debug_stderr_topic(struct mgos_config *cfg, const char *val);
 void mgos_config_set_device_id(struct mgos_config *cfg, const char *val);
 void mgos_config_set_device_license(struct mgos_config *cfg, const char *val);
+void mgos_config_set_device_firmware(struct mgos_config *cfg, const char *val);
+void mgos_config_set_device_hardware(struct mgos_config *cfg, const char *val);
+void mgos_config_set_device_ota_url(struct mgos_config *cfg, const char *val);
+void mgos_config_set_device_new_firmware(struct mgos_config *cfg, const char *val);
+void mgos_config_set_device_subscription(struct mgos_config *cfg, int         val);
 void mgos_config_set_sys_mount_path(struct mgos_config *cfg, const char *val);
 void mgos_config_set_sys_mount_dev_type(struct mgos_config *cfg, const char *val);
 void mgos_config_set_sys_mount_dev_opts(struct mgos_config *cfg, const char *val);
@@ -609,6 +746,16 @@ void mgos_config_set_i2c_freq(struct mgos_config *cfg, int         val);
 void mgos_config_set_i2c_debug(struct mgos_config *cfg, int         val);
 void mgos_config_set_i2c_sda_gpio(struct mgos_config *cfg, int         val);
 void mgos_config_set_i2c_scl_gpio(struct mgos_config *cfg, int         val);
+void mgos_config_set_http_enable(struct mgos_config *cfg, int         val);
+void mgos_config_set_http_listen_addr(struct mgos_config *cfg, const char *val);
+void mgos_config_set_http_document_root(struct mgos_config *cfg, const char *val);
+void mgos_config_set_http_ssl_cert(struct mgos_config *cfg, const char *val);
+void mgos_config_set_http_ssl_key(struct mgos_config *cfg, const char *val);
+void mgos_config_set_http_ssl_ca_cert(struct mgos_config *cfg, const char *val);
+void mgos_config_set_http_upload_acl(struct mgos_config *cfg, const char *val);
+void mgos_config_set_http_hidden_files(struct mgos_config *cfg, const char *val);
+void mgos_config_set_http_auth_domain(struct mgos_config *cfg, const char *val);
+void mgos_config_set_http_auth_file(struct mgos_config *cfg, const char *val);
 void mgos_config_set_mjs_generate_jsc(struct mgos_config *cfg, int         val);
 void mgos_config_set_mqtt_enable(struct mgos_config *cfg, int         val);
 void mgos_config_set_mqtt_server(struct mgos_config *cfg, const char *val);
@@ -652,6 +799,14 @@ void mgos_config_set_mqtt1_max_qos(struct mgos_config *cfg, int         val);
 void mgos_config_set_mqtt1_recv_mbuf_limit(struct mgos_config *cfg, int         val);
 void mgos_config_set_mqtt1_require_time(struct mgos_config *cfg, int         val);
 void mgos_config_set_mqtt1_cloud_events(struct mgos_config *cfg, int         val);
+void mgos_config_set_provision_btn_pin(struct mgos_config *cfg, int         val);
+void mgos_config_set_provision_btn_pull_up(struct mgos_config *cfg, int         val);
+void mgos_config_set_provision_btn_hold_ms(struct mgos_config *cfg, int         val);
+void mgos_config_set_provision_led_pin(struct mgos_config *cfg, int         val);
+void mgos_config_set_provision_led_active_high(struct mgos_config *cfg, int         val);
+void mgos_config_set_provision_stable_state(struct mgos_config *cfg, int         val);
+void mgos_config_set_provision_timeout(struct mgos_config *cfg, int         val);
+void mgos_config_set_provision_max_state(struct mgos_config *cfg, int         val);
 void mgos_config_set_rpc_enable(struct mgos_config *cfg, int         val);
 void mgos_config_set_rpc_max_frame_size(struct mgos_config *cfg, int         val);
 void mgos_config_set_rpc_max_queue_length(struct mgos_config *cfg, int         val);
@@ -719,6 +874,11 @@ void mgos_config_set_wifi_sta2_nameserver(struct mgos_config *cfg, const char *v
 void mgos_config_set_wifi_sta2_dhcp_hostname(struct mgos_config *cfg, const char *val);
 void mgos_config_set_wifi_sta_cfg_idx(struct mgos_config *cfg, int         val);
 void mgos_config_set_wifi_sta_connect_timeout(struct mgos_config *cfg, int         val);
+void mgos_config_set_sntp_enable(struct mgos_config *cfg, int         val);
+void mgos_config_set_sntp_server(struct mgos_config *cfg, const char *val);
+void mgos_config_set_sntp_retry_min(struct mgos_config *cfg, int         val);
+void mgos_config_set_sntp_retry_max(struct mgos_config *cfg, int         val);
+void mgos_config_set_sntp_update_interval(struct mgos_config *cfg, int         val);
 void mgos_config_set_board_led1_pin(struct mgos_config *cfg, int         val);
 void mgos_config_set_board_led1_active_high(struct mgos_config *cfg, int         val);
 void mgos_config_set_board_led2_pin(struct mgos_config *cfg, int         val);
@@ -731,11 +891,13 @@ void mgos_config_set_board_btn2_pin(struct mgos_config *cfg, int         val);
 void mgos_config_set_board_btn2_pull_up(struct mgos_config *cfg, int         val);
 void mgos_config_set_board_btn3_pin(struct mgos_config *cfg, int         val);
 void mgos_config_set_board_btn3_pull_up(struct mgos_config *cfg, int         val);
-void mgos_config_set_hardware_input1(struct mgos_config *cfg, int         val);
-void mgos_config_set_hardware_input2(struct mgos_config *cfg, int         val);
-void mgos_config_set_hardware_input3(struct mgos_config *cfg, int         val);
-void mgos_config_set_hardware_relay1(struct mgos_config *cfg, int         val);
-void mgos_config_set_hardware_relay2(struct mgos_config *cfg, int         val);
+void mgos_config_set_hardware_pin_voltage(struct mgos_config *cfg, int         val);
+void mgos_config_set_hardware_pin_thermal(struct mgos_config *cfg, int         val);
+void mgos_config_set_hardware_pin_contactor(struct mgos_config *cfg, int         val);
+void mgos_config_set_hardware_pin_on_relay(struct mgos_config *cfg, int         val);
+void mgos_config_set_hardware_pin_off_relay(struct mgos_config *cfg, int         val);
+void mgos_config_set_hardware_timer_telemetry(struct mgos_config *cfg, int         val);
+void mgos_config_set_hardware_timer_pulse(struct mgos_config *cfg, int         val);
 /* }}} */
 
 extern struct mgos_config mgos_sys_config;
@@ -771,6 +933,16 @@ static inline const struct mgos_config_device *mgos_sys_config_get_device(void) 
 static inline const char *mgos_sys_config_get_device_id(void) { return mgos_config_get_device_id(&mgos_sys_config); }
 #define MGOS_SYS_CONFIG_HAVE_DEVICE_LICENSE
 static inline const char *mgos_sys_config_get_device_license(void) { return mgos_config_get_device_license(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_DEVICE_FIRMWARE
+static inline const char *mgos_sys_config_get_device_firmware(void) { return mgos_config_get_device_firmware(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_DEVICE_HARDWARE
+static inline const char *mgos_sys_config_get_device_hardware(void) { return mgos_config_get_device_hardware(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_DEVICE_OTA_URL
+static inline const char *mgos_sys_config_get_device_ota_url(void) { return mgos_config_get_device_ota_url(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_DEVICE_NEW_FIRMWARE
+static inline const char *mgos_sys_config_get_device_new_firmware(void) { return mgos_config_get_device_new_firmware(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_DEVICE_SUBSCRIPTION
+static inline int         mgos_sys_config_get_device_subscription(void) { return mgos_config_get_device_subscription(&mgos_sys_config); }
 #define MGOS_SYS_CONFIG_HAVE_SYS
 static inline const struct mgos_config_sys *mgos_sys_config_get_sys(void) { return mgos_config_get_sys(&mgos_sys_config); }
 #define MGOS_SYS_CONFIG_HAVE_SYS_MOUNT
@@ -815,6 +987,28 @@ static inline int         mgos_sys_config_get_i2c_debug(void) { return mgos_conf
 static inline int         mgos_sys_config_get_i2c_sda_gpio(void) { return mgos_config_get_i2c_sda_gpio(&mgos_sys_config); }
 #define MGOS_SYS_CONFIG_HAVE_I2C_SCL_GPIO
 static inline int         mgos_sys_config_get_i2c_scl_gpio(void) { return mgos_config_get_i2c_scl_gpio(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_HTTP
+static inline const struct mgos_config_http *mgos_sys_config_get_http(void) { return mgos_config_get_http(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_HTTP_ENABLE
+static inline int         mgos_sys_config_get_http_enable(void) { return mgos_config_get_http_enable(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_HTTP_LISTEN_ADDR
+static inline const char *mgos_sys_config_get_http_listen_addr(void) { return mgos_config_get_http_listen_addr(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_HTTP_DOCUMENT_ROOT
+static inline const char *mgos_sys_config_get_http_document_root(void) { return mgos_config_get_http_document_root(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_HTTP_SSL_CERT
+static inline const char *mgos_sys_config_get_http_ssl_cert(void) { return mgos_config_get_http_ssl_cert(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_HTTP_SSL_KEY
+static inline const char *mgos_sys_config_get_http_ssl_key(void) { return mgos_config_get_http_ssl_key(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_HTTP_SSL_CA_CERT
+static inline const char *mgos_sys_config_get_http_ssl_ca_cert(void) { return mgos_config_get_http_ssl_ca_cert(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_HTTP_UPLOAD_ACL
+static inline const char *mgos_sys_config_get_http_upload_acl(void) { return mgos_config_get_http_upload_acl(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_HTTP_HIDDEN_FILES
+static inline const char *mgos_sys_config_get_http_hidden_files(void) { return mgos_config_get_http_hidden_files(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_HTTP_AUTH_DOMAIN
+static inline const char *mgos_sys_config_get_http_auth_domain(void) { return mgos_config_get_http_auth_domain(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_HTTP_AUTH_FILE
+static inline const char *mgos_sys_config_get_http_auth_file(void) { return mgos_config_get_http_auth_file(&mgos_sys_config); }
 #define MGOS_SYS_CONFIG_HAVE_MJS
 static inline const struct mgos_config_mjs *mgos_sys_config_get_mjs(void) { return mgos_config_get_mjs(&mgos_sys_config); }
 #define MGOS_SYS_CONFIG_HAVE_MJS_GENERATE_JSC
@@ -907,6 +1101,28 @@ static inline int         mgos_sys_config_get_mqtt1_recv_mbuf_limit(void) { retu
 static inline int         mgos_sys_config_get_mqtt1_require_time(void) { return mgos_config_get_mqtt1_require_time(&mgos_sys_config); }
 #define MGOS_SYS_CONFIG_HAVE_MQTT1_CLOUD_EVENTS
 static inline int         mgos_sys_config_get_mqtt1_cloud_events(void) { return mgos_config_get_mqtt1_cloud_events(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_PROVISION
+static inline const struct mgos_config_provision *mgos_sys_config_get_provision(void) { return mgos_config_get_provision(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_PROVISION_BTN
+static inline const struct mgos_config_provision_btn *mgos_sys_config_get_provision_btn(void) { return mgos_config_get_provision_btn(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_PROVISION_BTN_PIN
+static inline int         mgos_sys_config_get_provision_btn_pin(void) { return mgos_config_get_provision_btn_pin(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_PROVISION_BTN_PULL_UP
+static inline int         mgos_sys_config_get_provision_btn_pull_up(void) { return mgos_config_get_provision_btn_pull_up(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_PROVISION_BTN_HOLD_MS
+static inline int         mgos_sys_config_get_provision_btn_hold_ms(void) { return mgos_config_get_provision_btn_hold_ms(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_PROVISION_LED
+static inline const struct mgos_config_provision_led *mgos_sys_config_get_provision_led(void) { return mgos_config_get_provision_led(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_PROVISION_LED_PIN
+static inline int         mgos_sys_config_get_provision_led_pin(void) { return mgos_config_get_provision_led_pin(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_PROVISION_LED_ACTIVE_HIGH
+static inline int         mgos_sys_config_get_provision_led_active_high(void) { return mgos_config_get_provision_led_active_high(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_PROVISION_STABLE_STATE
+static inline int         mgos_sys_config_get_provision_stable_state(void) { return mgos_config_get_provision_stable_state(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_PROVISION_TIMEOUT
+static inline int         mgos_sys_config_get_provision_timeout(void) { return mgos_config_get_provision_timeout(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_PROVISION_MAX_STATE
+static inline int         mgos_sys_config_get_provision_max_state(void) { return mgos_config_get_provision_max_state(&mgos_sys_config); }
 #define MGOS_SYS_CONFIG_HAVE_RPC
 static inline const struct mgos_config_rpc *mgos_sys_config_get_rpc(void) { return mgos_config_get_rpc(&mgos_sys_config); }
 #define MGOS_SYS_CONFIG_HAVE_RPC_ENABLE
@@ -1055,6 +1271,18 @@ static inline const char *mgos_sys_config_get_wifi_sta2_dhcp_hostname(void) { re
 static inline int         mgos_sys_config_get_wifi_sta_cfg_idx(void) { return mgos_config_get_wifi_sta_cfg_idx(&mgos_sys_config); }
 #define MGOS_SYS_CONFIG_HAVE_WIFI_STA_CONNECT_TIMEOUT
 static inline int         mgos_sys_config_get_wifi_sta_connect_timeout(void) { return mgos_config_get_wifi_sta_connect_timeout(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_SNTP
+static inline const struct mgos_config_sntp *mgos_sys_config_get_sntp(void) { return mgos_config_get_sntp(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_SNTP_ENABLE
+static inline int         mgos_sys_config_get_sntp_enable(void) { return mgos_config_get_sntp_enable(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_SNTP_SERVER
+static inline const char *mgos_sys_config_get_sntp_server(void) { return mgos_config_get_sntp_server(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_SNTP_RETRY_MIN
+static inline int         mgos_sys_config_get_sntp_retry_min(void) { return mgos_config_get_sntp_retry_min(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_SNTP_RETRY_MAX
+static inline int         mgos_sys_config_get_sntp_retry_max(void) { return mgos_config_get_sntp_retry_max(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_SNTP_UPDATE_INTERVAL
+static inline int         mgos_sys_config_get_sntp_update_interval(void) { return mgos_config_get_sntp_update_interval(&mgos_sys_config); }
 #define MGOS_SYS_CONFIG_HAVE_BOARD
 static inline const struct mgos_config_board *mgos_sys_config_get_board(void) { return mgos_config_get_board(&mgos_sys_config); }
 #define MGOS_SYS_CONFIG_HAVE_BOARD_LED1
@@ -1095,16 +1323,24 @@ static inline int         mgos_sys_config_get_board_btn3_pin(void) { return mgos
 static inline int         mgos_sys_config_get_board_btn3_pull_up(void) { return mgos_config_get_board_btn3_pull_up(&mgos_sys_config); }
 #define MGOS_SYS_CONFIG_HAVE_HARDWARE
 static inline const struct mgos_config_hardware *mgos_sys_config_get_hardware(void) { return mgos_config_get_hardware(&mgos_sys_config); }
-#define MGOS_SYS_CONFIG_HAVE_HARDWARE_INPUT1
-static inline int         mgos_sys_config_get_hardware_input1(void) { return mgos_config_get_hardware_input1(&mgos_sys_config); }
-#define MGOS_SYS_CONFIG_HAVE_HARDWARE_INPUT2
-static inline int         mgos_sys_config_get_hardware_input2(void) { return mgos_config_get_hardware_input2(&mgos_sys_config); }
-#define MGOS_SYS_CONFIG_HAVE_HARDWARE_INPUT3
-static inline int         mgos_sys_config_get_hardware_input3(void) { return mgos_config_get_hardware_input3(&mgos_sys_config); }
-#define MGOS_SYS_CONFIG_HAVE_HARDWARE_RELAY1
-static inline int         mgos_sys_config_get_hardware_relay1(void) { return mgos_config_get_hardware_relay1(&mgos_sys_config); }
-#define MGOS_SYS_CONFIG_HAVE_HARDWARE_RELAY2
-static inline int         mgos_sys_config_get_hardware_relay2(void) { return mgos_config_get_hardware_relay2(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_HARDWARE_PIN
+static inline const struct mgos_config_hardware_pin *mgos_sys_config_get_hardware_pin(void) { return mgos_config_get_hardware_pin(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_HARDWARE_PIN_VOLTAGE
+static inline int         mgos_sys_config_get_hardware_pin_voltage(void) { return mgos_config_get_hardware_pin_voltage(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_HARDWARE_PIN_THERMAL
+static inline int         mgos_sys_config_get_hardware_pin_thermal(void) { return mgos_config_get_hardware_pin_thermal(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_HARDWARE_PIN_CONTACTOR
+static inline int         mgos_sys_config_get_hardware_pin_contactor(void) { return mgos_config_get_hardware_pin_contactor(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_HARDWARE_PIN_ON_RELAY
+static inline int         mgos_sys_config_get_hardware_pin_on_relay(void) { return mgos_config_get_hardware_pin_on_relay(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_HARDWARE_PIN_OFF_RELAY
+static inline int         mgos_sys_config_get_hardware_pin_off_relay(void) { return mgos_config_get_hardware_pin_off_relay(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_HARDWARE_TIMER
+static inline const struct mgos_config_hardware_timer *mgos_sys_config_get_hardware_timer(void) { return mgos_config_get_hardware_timer(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_HARDWARE_TIMER_TELEMETRY
+static inline int         mgos_sys_config_get_hardware_timer_telemetry(void) { return mgos_config_get_hardware_timer_telemetry(&mgos_sys_config); }
+#define MGOS_SYS_CONFIG_HAVE_HARDWARE_TIMER_PULSE
+static inline int         mgos_sys_config_get_hardware_timer_pulse(void) { return mgos_config_get_hardware_timer_pulse(&mgos_sys_config); }
 
 static inline void mgos_sys_config_set_debug_udp_log_addr(const char *val) { mgos_config_set_debug_udp_log_addr(&mgos_sys_config, val); }
 static inline void mgos_sys_config_set_debug_level(int         val) { mgos_config_set_debug_level(&mgos_sys_config, val); }
@@ -1118,6 +1354,11 @@ static inline void mgos_sys_config_set_debug_stdout_topic(const char *val) { mgo
 static inline void mgos_sys_config_set_debug_stderr_topic(const char *val) { mgos_config_set_debug_stderr_topic(&mgos_sys_config, val); }
 static inline void mgos_sys_config_set_device_id(const char *val) { mgos_config_set_device_id(&mgos_sys_config, val); }
 static inline void mgos_sys_config_set_device_license(const char *val) { mgos_config_set_device_license(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_device_firmware(const char *val) { mgos_config_set_device_firmware(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_device_hardware(const char *val) { mgos_config_set_device_hardware(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_device_ota_url(const char *val) { mgos_config_set_device_ota_url(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_device_new_firmware(const char *val) { mgos_config_set_device_new_firmware(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_device_subscription(int         val) { mgos_config_set_device_subscription(&mgos_sys_config, val); }
 static inline void mgos_sys_config_set_sys_mount_path(const char *val) { mgos_config_set_sys_mount_path(&mgos_sys_config, val); }
 static inline void mgos_sys_config_set_sys_mount_dev_type(const char *val) { mgos_config_set_sys_mount_dev_type(&mgos_sys_config, val); }
 static inline void mgos_sys_config_set_sys_mount_dev_opts(const char *val) { mgos_config_set_sys_mount_dev_opts(&mgos_sys_config, val); }
@@ -1136,6 +1377,16 @@ static inline void mgos_sys_config_set_i2c_freq(int         val) { mgos_config_s
 static inline void mgos_sys_config_set_i2c_debug(int         val) { mgos_config_set_i2c_debug(&mgos_sys_config, val); }
 static inline void mgos_sys_config_set_i2c_sda_gpio(int         val) { mgos_config_set_i2c_sda_gpio(&mgos_sys_config, val); }
 static inline void mgos_sys_config_set_i2c_scl_gpio(int         val) { mgos_config_set_i2c_scl_gpio(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_http_enable(int         val) { mgos_config_set_http_enable(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_http_listen_addr(const char *val) { mgos_config_set_http_listen_addr(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_http_document_root(const char *val) { mgos_config_set_http_document_root(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_http_ssl_cert(const char *val) { mgos_config_set_http_ssl_cert(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_http_ssl_key(const char *val) { mgos_config_set_http_ssl_key(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_http_ssl_ca_cert(const char *val) { mgos_config_set_http_ssl_ca_cert(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_http_upload_acl(const char *val) { mgos_config_set_http_upload_acl(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_http_hidden_files(const char *val) { mgos_config_set_http_hidden_files(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_http_auth_domain(const char *val) { mgos_config_set_http_auth_domain(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_http_auth_file(const char *val) { mgos_config_set_http_auth_file(&mgos_sys_config, val); }
 static inline void mgos_sys_config_set_mjs_generate_jsc(int         val) { mgos_config_set_mjs_generate_jsc(&mgos_sys_config, val); }
 static inline void mgos_sys_config_set_mqtt_enable(int         val) { mgos_config_set_mqtt_enable(&mgos_sys_config, val); }
 static inline void mgos_sys_config_set_mqtt_server(const char *val) { mgos_config_set_mqtt_server(&mgos_sys_config, val); }
@@ -1179,6 +1430,14 @@ static inline void mgos_sys_config_set_mqtt1_max_qos(int         val) { mgos_con
 static inline void mgos_sys_config_set_mqtt1_recv_mbuf_limit(int         val) { mgos_config_set_mqtt1_recv_mbuf_limit(&mgos_sys_config, val); }
 static inline void mgos_sys_config_set_mqtt1_require_time(int         val) { mgos_config_set_mqtt1_require_time(&mgos_sys_config, val); }
 static inline void mgos_sys_config_set_mqtt1_cloud_events(int         val) { mgos_config_set_mqtt1_cloud_events(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_provision_btn_pin(int         val) { mgos_config_set_provision_btn_pin(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_provision_btn_pull_up(int         val) { mgos_config_set_provision_btn_pull_up(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_provision_btn_hold_ms(int         val) { mgos_config_set_provision_btn_hold_ms(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_provision_led_pin(int         val) { mgos_config_set_provision_led_pin(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_provision_led_active_high(int         val) { mgos_config_set_provision_led_active_high(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_provision_stable_state(int         val) { mgos_config_set_provision_stable_state(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_provision_timeout(int         val) { mgos_config_set_provision_timeout(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_provision_max_state(int         val) { mgos_config_set_provision_max_state(&mgos_sys_config, val); }
 static inline void mgos_sys_config_set_rpc_enable(int         val) { mgos_config_set_rpc_enable(&mgos_sys_config, val); }
 static inline void mgos_sys_config_set_rpc_max_frame_size(int         val) { mgos_config_set_rpc_max_frame_size(&mgos_sys_config, val); }
 static inline void mgos_sys_config_set_rpc_max_queue_length(int         val) { mgos_config_set_rpc_max_queue_length(&mgos_sys_config, val); }
@@ -1246,6 +1505,11 @@ static inline void mgos_sys_config_set_wifi_sta2_nameserver(const char *val) { m
 static inline void mgos_sys_config_set_wifi_sta2_dhcp_hostname(const char *val) { mgos_config_set_wifi_sta2_dhcp_hostname(&mgos_sys_config, val); }
 static inline void mgos_sys_config_set_wifi_sta_cfg_idx(int         val) { mgos_config_set_wifi_sta_cfg_idx(&mgos_sys_config, val); }
 static inline void mgos_sys_config_set_wifi_sta_connect_timeout(int         val) { mgos_config_set_wifi_sta_connect_timeout(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_sntp_enable(int         val) { mgos_config_set_sntp_enable(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_sntp_server(const char *val) { mgos_config_set_sntp_server(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_sntp_retry_min(int         val) { mgos_config_set_sntp_retry_min(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_sntp_retry_max(int         val) { mgos_config_set_sntp_retry_max(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_sntp_update_interval(int         val) { mgos_config_set_sntp_update_interval(&mgos_sys_config, val); }
 static inline void mgos_sys_config_set_board_led1_pin(int         val) { mgos_config_set_board_led1_pin(&mgos_sys_config, val); }
 static inline void mgos_sys_config_set_board_led1_active_high(int         val) { mgos_config_set_board_led1_active_high(&mgos_sys_config, val); }
 static inline void mgos_sys_config_set_board_led2_pin(int         val) { mgos_config_set_board_led2_pin(&mgos_sys_config, val); }
@@ -1258,11 +1522,13 @@ static inline void mgos_sys_config_set_board_btn2_pin(int         val) { mgos_co
 static inline void mgos_sys_config_set_board_btn2_pull_up(int         val) { mgos_config_set_board_btn2_pull_up(&mgos_sys_config, val); }
 static inline void mgos_sys_config_set_board_btn3_pin(int         val) { mgos_config_set_board_btn3_pin(&mgos_sys_config, val); }
 static inline void mgos_sys_config_set_board_btn3_pull_up(int         val) { mgos_config_set_board_btn3_pull_up(&mgos_sys_config, val); }
-static inline void mgos_sys_config_set_hardware_input1(int         val) { mgos_config_set_hardware_input1(&mgos_sys_config, val); }
-static inline void mgos_sys_config_set_hardware_input2(int         val) { mgos_config_set_hardware_input2(&mgos_sys_config, val); }
-static inline void mgos_sys_config_set_hardware_input3(int         val) { mgos_config_set_hardware_input3(&mgos_sys_config, val); }
-static inline void mgos_sys_config_set_hardware_relay1(int         val) { mgos_config_set_hardware_relay1(&mgos_sys_config, val); }
-static inline void mgos_sys_config_set_hardware_relay2(int         val) { mgos_config_set_hardware_relay2(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_hardware_pin_voltage(int         val) { mgos_config_set_hardware_pin_voltage(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_hardware_pin_thermal(int         val) { mgos_config_set_hardware_pin_thermal(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_hardware_pin_contactor(int         val) { mgos_config_set_hardware_pin_contactor(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_hardware_pin_on_relay(int         val) { mgos_config_set_hardware_pin_on_relay(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_hardware_pin_off_relay(int         val) { mgos_config_set_hardware_pin_off_relay(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_hardware_timer_telemetry(int         val) { mgos_config_set_hardware_timer_telemetry(&mgos_sys_config, val); }
+static inline void mgos_sys_config_set_hardware_timer_pulse(int         val) { mgos_config_set_hardware_timer_pulse(&mgos_sys_config, val); }
 
 #ifdef __cplusplus
 }

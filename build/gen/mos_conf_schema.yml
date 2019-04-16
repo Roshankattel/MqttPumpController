@@ -44,6 +44,43 @@
   - i
   - 1
   - title: mbedTLS debug level
+- - http
+  - o
+  - title: HTTP Server
+- - http.enable
+  - b
+  - true
+  - title: Enable HTTP Server
+- - http.listen_addr
+  - s
+  - "80"
+  - title: Listening port / address
+- - http.document_root
+  - s
+  - /
+  - title: Root for serving files. Setting to empty disables file serving.
+- - http.ssl_cert
+  - s
+  - title: Turn on SSL on the listener, use this cert
+- - http.ssl_key
+  - s
+  - title: SSL key to use
+- - http.ssl_ca_cert
+  - s
+  - title: Verify clients this CA bundle
+- - http.upload_acl
+  - s
+  - '*'
+  - title: Upload file ACL
+- - http.hidden_files
+  - s
+  - title: Hidden file pattern
+- - http.auth_domain
+  - s
+  - title: Enable authentication of all HTTP requests
+- - http.auth_file
+  - s
+  - title: Password file to use for auth
 - - mjs
   - o
   - title: mJS settings
@@ -149,6 +186,46 @@
   - s
   - ""
   - title: MQTT topic to publish STDERR to
+- - provision
+  - o
+  - title: Provision library settings
+- - provision.btn
+  - o
+  - title: Reset button settings
+- - provision.btn.pin
+  - i
+  - -1
+  - title: Reset button GPIO pin
+- - provision.btn.pull_up
+  - b
+  - false
+  - title: True if button is pulled up when inactive
+- - provision.btn.hold_ms
+  - i
+  - 0
+  - title: Hold interval in milliseconds. -1 to disable, 0 to reset if held on boot,
+      > 0 to reset if held at runtime for this long.
+- - provision.led.pin
+  - i
+  - -1
+  - title: LED GPIO pin. If >= 0, LED blinking will indicate current state.
+- - provision.led.active_high
+  - b
+  - true
+  - title: True if LED is on when output is high (1)
+- - provision.stable_state
+  - i
+  - 3
+  - title: A stable state, beyond which reset will not happen. Se to 0 to disable
+      reset.
+- - provision.timeout
+  - i
+  - 300
+  - title: Maximum time since boot allowed to reach stable state
+- - provision.max_state
+  - i
+  - 0
+  - title: Maximum state reached so far
 - - rpc
   - o
   - title: RPC settings
@@ -177,25 +254,6 @@
 - - rpc.auth_file
   - s
   - title: File with user credentials in the htdigest format
-- - rpc.uart
-  - o
-  - title: RPC-over-UART settings
-- - rpc.uart.uart_no
-  - i
-  - 0
-  - title: UART number (-1 to disable)
-- - rpc.uart.baud_rate
-  - i
-  - 115200
-  - title: Baud rate
-- - rpc.uart.fc_type
-  - i
-  - 2
-  - title: 'Flow control: 0 - none, 1 - CTS/RTS, 2 - XON/XOFF'
-- - rpc.uart.dst
-  - s
-  - ""
-  - title: Destination reachable via this channel
 - - wifi
   - o
   - hide: true
@@ -325,6 +383,48 @@
   - b
   - true
   - title: Keep AP enabled when station is on
+- - rpc.uart
+  - o
+  - title: RPC-over-UART settings
+- - rpc.uart.uart_no
+  - i
+  - 0
+  - title: UART number (-1 to disable)
+- - rpc.uart.baud_rate
+  - i
+  - 115200
+  - title: Baud rate
+- - rpc.uart.fc_type
+  - i
+  - 2
+  - title: 'Flow control: 0 - none, 1 - CTS/RTS, 2 - XON/XOFF'
+- - rpc.uart.dst
+  - s
+  - ""
+  - title: Destination reachable via this channel
+- - sntp
+  - o
+  - title: SNTP settings
+- - sntp.enable
+  - b
+  - true
+  - title: Enable SNTP
+- - sntp.server
+  - s
+  - time.google.com
+  - title: Server address
+- - sntp.retry_min
+  - i
+  - 1
+  - title: Minimum retry interval
+- - sntp.retry_max
+  - i
+  - 30
+  - title: Maximum retry interval
+- - sntp.update_interval
+  - i
+  - 7200
+  - title: Update interval. If 0, performs a one-off sync
 - - board
   - o
   - title: Board layout configuration
@@ -401,31 +501,83 @@
 - - mqtt.server
   - m16.cloudmqtt.com:15570
 - - wifi.sta.enable
+  - false
+- - wifi.ap.enable
   - true
-- - wifi.sta.ssid
-  - smps
-- - wifi.sta.pass
-  - 432FACC99A
+- - wifi.ap.ip
+  - 192.168.4.1
+- - wifi.ap.ssid
+  - Preesu_??????
+- - wifi.ap.pass
+  - "12345678"
+- - device.firmware
+  - s
+  - "1.2"
+  - title: device firmware
+- - device.hardware
+  - s
+  - pump
+  - title: device hardware
+- - device.ota_url
+  - s
+  - www.zyx.com
+  - title: OTA utl
+- - device.new_firmware
+  - s
+  - "55555"
+  - title: new firmware
+- - device.subscription
+  - b
+  - false
+  - title: device subsciption
 - - hardware
   - o
+  - title: Hardware configurations
+- - hardware.pin
+  - o
   - title: Hardware pin mappings
-- - hardware.input1
+- - hardware.pin.voltage
   - i
   - 12
-  - title: input pin1
-- - hardware.input2
+  - title: Voltage fault pin
+- - hardware.pin.thermal
   - i
   - 13
-  - title: input pin2
-- - hardware.input3
+  - title: Thermal fault pin
+- - hardware.pin.contactor
   - i
   - 14
-  - title: input pin3
-- - hardware.relay1
+  - title: Contactor status pin
+- - hardware.pin.on_relay
   - i
   - 4
-  - title: relay pin1
-- - hardware.relay2
+  - title: Pump on pin
+- - hardware.pin.off_relay
   - i
   - 5
-  - title: relay pin1
+  - title: Pump off pin
+- - hardware.timer
+  - o
+  - title: Hardware timer configs
+- - hardware.timer.telemetry
+  - i
+  - 300000
+  - title: Interval for telemetry update
+- - hardware.timer.pulse
+  - i
+  - 1000
+  - title: Pulse width for pump on/off relay
+- - provision.btn.pin
+  - 0
+- - provision.btn.pull_up
+  - true
+- - provision.btn.hold_ms
+  - 5000
+- - provision.led.pin
+  - 16
+- - provision.led.active_high
+  - false
+- - provision.stable_state
+  - 3
+- - provision.timeout
+  - 3000

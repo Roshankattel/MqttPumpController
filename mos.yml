@@ -18,6 +18,8 @@ sources:
 filesystem:
   - fs
 
+ffi_symbols:
+  - mgos_*s
 # Custom configuration entries, settable via "device configuration"
 # Below is a custom firmware configuration example.
 # Uncomment and modify according to your needs:
@@ -47,27 +49,55 @@ config_schema:
   - ["mqtt.enable", true]
   - ["mqtt.user", "lemfpvyz"]                   
   - ["mqtt.pass", "jy0jZ7fTyjZ1"]                 
-  - ["mqtt.server", "m16.cloudmqtt.com:15570"] 
-  - ["wifi.sta.enable", true]
-  - ["wifi.sta.ssid", "smps"]
-  - ["wifi.sta.pass", "432FACC99A"]
-  - ["hardware", "o", {title: "Hardware pin mappings"}]
-  - ["hardware.input1", "i", 12, {title: "input pin1"}]
-  - ["hardware.input2", "i", 13, {title: "input pin2"}]
-  - ["hardware.input3", "i", 14, {title: "input pin3"}]
-  - ["hardware.relay1", "i", 4, {title: "relay pin1"}]
-  - ["hardware.relay2", "i", 5, {title: "relay pin1"}]
+  - ["mqtt.server", "m16.cloudmqtt.com:15570"]
+  # - ["mqtt.user", "fcukblkd"]                                  
+  # - ["mqtt.server", "m21.cloudmqtt.com:16705"] 
+  # - ["mqtt.server", "192.168.86.24:1883"] 
+  # - ["mqtt.user", "tGwrkFHSaCrWYyjuWarl"]                   
+  # - ["wifi.sta.ssid", "smps"]
+  # - ["wifi.sta.pass", "432FACC99A"]
+  - ["wifi.sta.enable", false]
+  - ["wifi.ap.enable", true]
+  - ["wifi.ap.ip", "192.168.4.1"]
+  - ["wifi.ap.ssid", "Preesu_??????"]
+  - ["wifi.ap.pass", "12345678"]
+  - ["device.firmware", "s", "1.2", {title: "device firmware"}]
+  - ["device.hardware", "s", "pump", {title: "device hardware"}]
+  - ["device.ota_url", "s","www.zyx.com", {title: "OTA utl"}]
+  - ["device.new_firmware","s", "55555", {title: "new firmware"}]
+  - ["device.subscription","b", false, {title: "device subsciption"}]
+  - ["hardware", "o", {title: "Hardware configurations"}]
+  - ["hardware.pin", "o", {title: "Hardware pin mappings"}]
+  - ["hardware.pin.voltage", "i", 12, {title: "Voltage fault pin"}]
+  - ["hardware.pin.thermal", "i", 13, {title: "Thermal fault pin"}]
+  - ["hardware.pin.contactor", "i", 14, {title: "Contactor status pin"}]
+  - ["hardware.pin.on_relay", "i", 4, {title: "Pump on pin"}]
+  - ["hardware.pin.off_relay", "i", 5, {title: "Pump off pin"}]
+  - ["hardware.timer", "o", {title: "Hardware timer configs"}]
+  - ["hardware.timer.telemetry", "i", 300000, {title: "Interval for telemetry update"}]
+  - ["hardware.timer.pulse", "i", 1000, {title: "Pulse width for pump on/off relay"}]
+  - ["provision.btn.pin", 0]
+  - ["provision.btn.pull_up", true]
+  - ["provision.btn.hold_ms", 5000]
+  - ["provision.led.pin", 16]
+  - ["provision.led.active_high", false]
+  - ["provision.stable_state", 3]
+  - ["provision.timeout",3000]
   
-
-
+ 
 libs:
   - origin: https://github.com/mongoose-os-libs/boards
+  - origin: https://github.com/mongoose-os-libs/http-server
   - origin: https://github.com/mongoose-os-libs/ca-bundle
   - origin: https://github.com/mongoose-os-libs/rpc-service-config
   - origin: https://github.com/mongoose-os-libs/rpc-service-fs
+  - origin: https://github.com/mongoose-os-libs/adc
+  - origin: https://github.com/mongoose-os-libs/rpc-service-wifi
   - origin: https://github.com/mongoose-os-libs/rpc-uart
   - origin: https://github.com/mongoose-os-libs/mqtt 
   - origin: https://github.com/mongoose-os-libs/mjs
+  - origin: https://github.com/mongoose-os-libs/sntp
+  - origin: https://github.com/mongoose-os-libs/provision
 
 # Used by the mos tool to catch mos binaries incompatible with this file format
 manifest_version: 2017-09-29

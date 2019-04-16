@@ -1,14 +1,14 @@
 /* clang-format off */
 /*
  * Generated file - do not edit.
- * Command: /mongoose-os/fw/tools/gen_sys_config.py --c_name=mgos_config --c_global_name=mgos_sys_config --dest_dir=/data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/build/gen/ /mongoose-os/fw/src/mgos_debug_udp_config.yaml /mongoose-os/fw/src/mgos_sys_config.yaml /mongoose-os/fw/platforms/esp8266/src/esp_sys_config.yaml /data/fwbuild-volumes/2.12.1/apps/mqtt-3interrupt-2relay/esp8266/build_contexts/build_ctx_416949635/build/gen/mos_conf_schema.yml
+ * Command: /mongoose-os/fw/tools/gen_sys_config.py --c_name=mgos_config --c_global_name=mgos_sys_config --dest_dir=/data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/build/gen/ /mongoose-os/fw/src/mgos_debug_udp_config.yaml /mongoose-os/fw/src/mgos_sys_config.yaml /mongoose-os/fw/platforms/esp8266/src/esp_sys_config.yaml /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/build/gen/mos_conf_schema.yml
  */
 
 #include <stddef.h>
 #include "mgos_config.h"
 
-const struct mgos_conf_entry mgos_config_schema_[182] = {
-  {.type = CONF_TYPE_OBJECT, .key = "", .offset = 0, .num_desc = 181},
+const struct mgos_conf_entry mgos_config_schema_[219] = {
+  {.type = CONF_TYPE_OBJECT, .key = "", .offset = 0, .num_desc = 218},
   {.type = CONF_TYPE_OBJECT, .key = "debug", .offset = offsetof(struct mgos_config, debug), .num_desc = 10},
   {.type = CONF_TYPE_STRING, .key = "udp_log_addr", .offset = offsetof(struct mgos_config, debug.udp_log_addr)},
   {.type = CONF_TYPE_INT, .key = "level", .offset = offsetof(struct mgos_config, debug.level)},
@@ -20,9 +20,14 @@ const struct mgos_conf_entry mgos_config_schema_[182] = {
   {.type = CONF_TYPE_INT, .key = "mbedtls_level", .offset = offsetof(struct mgos_config, debug.mbedtls_level)},
   {.type = CONF_TYPE_STRING, .key = "stdout_topic", .offset = offsetof(struct mgos_config, debug.stdout_topic)},
   {.type = CONF_TYPE_STRING, .key = "stderr_topic", .offset = offsetof(struct mgos_config, debug.stderr_topic)},
-  {.type = CONF_TYPE_OBJECT, .key = "device", .offset = offsetof(struct mgos_config, device), .num_desc = 2},
+  {.type = CONF_TYPE_OBJECT, .key = "device", .offset = offsetof(struct mgos_config, device), .num_desc = 7},
   {.type = CONF_TYPE_STRING, .key = "id", .offset = offsetof(struct mgos_config, device.id)},
   {.type = CONF_TYPE_STRING, .key = "license", .offset = offsetof(struct mgos_config, device.license)},
+  {.type = CONF_TYPE_STRING, .key = "firmware", .offset = offsetof(struct mgos_config, device.firmware)},
+  {.type = CONF_TYPE_STRING, .key = "hardware", .offset = offsetof(struct mgos_config, device.hardware)},
+  {.type = CONF_TYPE_STRING, .key = "ota_url", .offset = offsetof(struct mgos_config, device.ota_url)},
+  {.type = CONF_TYPE_STRING, .key = "new_firmware", .offset = offsetof(struct mgos_config, device.new_firmware)},
+  {.type = CONF_TYPE_BOOL, .key = "subscription", .offset = offsetof(struct mgos_config, device.subscription)},
   {.type = CONF_TYPE_OBJECT, .key = "sys", .offset = offsetof(struct mgos_config, sys), .num_desc = 14},
   {.type = CONF_TYPE_OBJECT, .key = "mount", .offset = offsetof(struct mgos_config, sys.mount), .num_desc = 5},
   {.type = CONF_TYPE_STRING, .key = "path", .offset = offsetof(struct mgos_config, sys.mount.path)},
@@ -45,6 +50,17 @@ const struct mgos_conf_entry mgos_config_schema_[182] = {
   {.type = CONF_TYPE_BOOL, .key = "debug", .offset = offsetof(struct mgos_config, i2c.debug)},
   {.type = CONF_TYPE_INT, .key = "sda_gpio", .offset = offsetof(struct mgos_config, i2c.sda_gpio)},
   {.type = CONF_TYPE_INT, .key = "scl_gpio", .offset = offsetof(struct mgos_config, i2c.scl_gpio)},
+  {.type = CONF_TYPE_OBJECT, .key = "http", .offset = offsetof(struct mgos_config, http), .num_desc = 10},
+  {.type = CONF_TYPE_BOOL, .key = "enable", .offset = offsetof(struct mgos_config, http.enable)},
+  {.type = CONF_TYPE_STRING, .key = "listen_addr", .offset = offsetof(struct mgos_config, http.listen_addr)},
+  {.type = CONF_TYPE_STRING, .key = "document_root", .offset = offsetof(struct mgos_config, http.document_root)},
+  {.type = CONF_TYPE_STRING, .key = "ssl_cert", .offset = offsetof(struct mgos_config, http.ssl_cert)},
+  {.type = CONF_TYPE_STRING, .key = "ssl_key", .offset = offsetof(struct mgos_config, http.ssl_key)},
+  {.type = CONF_TYPE_STRING, .key = "ssl_ca_cert", .offset = offsetof(struct mgos_config, http.ssl_ca_cert)},
+  {.type = CONF_TYPE_STRING, .key = "upload_acl", .offset = offsetof(struct mgos_config, http.upload_acl)},
+  {.type = CONF_TYPE_STRING, .key = "hidden_files", .offset = offsetof(struct mgos_config, http.hidden_files)},
+  {.type = CONF_TYPE_STRING, .key = "auth_domain", .offset = offsetof(struct mgos_config, http.auth_domain)},
+  {.type = CONF_TYPE_STRING, .key = "auth_file", .offset = offsetof(struct mgos_config, http.auth_file)},
   {.type = CONF_TYPE_OBJECT, .key = "mjs", .offset = offsetof(struct mgos_config, mjs), .num_desc = 1},
   {.type = CONF_TYPE_BOOL, .key = "generate_jsc", .offset = offsetof(struct mgos_config, mjs.generate_jsc)},
   {.type = CONF_TYPE_OBJECT, .key = "mqtt", .offset = offsetof(struct mgos_config, mqtt), .num_desc = 21},
@@ -91,6 +107,17 @@ const struct mgos_conf_entry mgos_config_schema_[182] = {
   {.type = CONF_TYPE_INT, .key = "recv_mbuf_limit", .offset = offsetof(struct mgos_config, mqtt1.recv_mbuf_limit)},
   {.type = CONF_TYPE_BOOL, .key = "require_time", .offset = offsetof(struct mgos_config, mqtt1.require_time)},
   {.type = CONF_TYPE_BOOL, .key = "cloud_events", .offset = offsetof(struct mgos_config, mqtt1.cloud_events)},
+  {.type = CONF_TYPE_OBJECT, .key = "provision", .offset = offsetof(struct mgos_config, provision), .num_desc = 10},
+  {.type = CONF_TYPE_OBJECT, .key = "btn", .offset = offsetof(struct mgos_config, provision.btn), .num_desc = 3},
+  {.type = CONF_TYPE_INT, .key = "pin", .offset = offsetof(struct mgos_config, provision.btn.pin)},
+  {.type = CONF_TYPE_BOOL, .key = "pull_up", .offset = offsetof(struct mgos_config, provision.btn.pull_up)},
+  {.type = CONF_TYPE_INT, .key = "hold_ms", .offset = offsetof(struct mgos_config, provision.btn.hold_ms)},
+  {.type = CONF_TYPE_OBJECT, .key = "led", .offset = offsetof(struct mgos_config, provision.led), .num_desc = 2},
+  {.type = CONF_TYPE_INT, .key = "pin", .offset = offsetof(struct mgos_config, provision.led.pin)},
+  {.type = CONF_TYPE_BOOL, .key = "active_high", .offset = offsetof(struct mgos_config, provision.led.active_high)},
+  {.type = CONF_TYPE_INT, .key = "stable_state", .offset = offsetof(struct mgos_config, provision.stable_state)},
+  {.type = CONF_TYPE_INT, .key = "timeout", .offset = offsetof(struct mgos_config, provision.timeout)},
+  {.type = CONF_TYPE_INT, .key = "max_state", .offset = offsetof(struct mgos_config, provision.max_state)},
   {.type = CONF_TYPE_OBJECT, .key = "rpc", .offset = offsetof(struct mgos_config, rpc), .num_desc = 12},
   {.type = CONF_TYPE_BOOL, .key = "enable", .offset = offsetof(struct mgos_config, rpc.enable)},
   {.type = CONF_TYPE_INT, .key = "max_frame_size", .offset = offsetof(struct mgos_config, rpc.max_frame_size)},
@@ -165,6 +192,12 @@ const struct mgos_conf_entry mgos_config_schema_[182] = {
   {.type = CONF_TYPE_STRING, .key = "dhcp_hostname", .offset = offsetof(struct mgos_config, wifi.sta2.dhcp_hostname)},
   {.type = CONF_TYPE_INT, .key = "sta_cfg_idx", .offset = offsetof(struct mgos_config, wifi.sta_cfg_idx)},
   {.type = CONF_TYPE_INT, .key = "sta_connect_timeout", .offset = offsetof(struct mgos_config, wifi.sta_connect_timeout)},
+  {.type = CONF_TYPE_OBJECT, .key = "sntp", .offset = offsetof(struct mgos_config, sntp), .num_desc = 5},
+  {.type = CONF_TYPE_BOOL, .key = "enable", .offset = offsetof(struct mgos_config, sntp.enable)},
+  {.type = CONF_TYPE_STRING, .key = "server", .offset = offsetof(struct mgos_config, sntp.server)},
+  {.type = CONF_TYPE_INT, .key = "retry_min", .offset = offsetof(struct mgos_config, sntp.retry_min)},
+  {.type = CONF_TYPE_INT, .key = "retry_max", .offset = offsetof(struct mgos_config, sntp.retry_max)},
+  {.type = CONF_TYPE_INT, .key = "update_interval", .offset = offsetof(struct mgos_config, sntp.update_interval)},
   {.type = CONF_TYPE_OBJECT, .key = "board", .offset = offsetof(struct mgos_config, board), .num_desc = 18},
   {.type = CONF_TYPE_OBJECT, .key = "led1", .offset = offsetof(struct mgos_config, board.led1), .num_desc = 2},
   {.type = CONF_TYPE_INT, .key = "pin", .offset = offsetof(struct mgos_config, board.led1.pin)},
@@ -184,12 +217,16 @@ const struct mgos_conf_entry mgos_config_schema_[182] = {
   {.type = CONF_TYPE_OBJECT, .key = "btn3", .offset = offsetof(struct mgos_config, board.btn3), .num_desc = 2},
   {.type = CONF_TYPE_INT, .key = "pin", .offset = offsetof(struct mgos_config, board.btn3.pin)},
   {.type = CONF_TYPE_BOOL, .key = "pull_up", .offset = offsetof(struct mgos_config, board.btn3.pull_up)},
-  {.type = CONF_TYPE_OBJECT, .key = "hardware", .offset = offsetof(struct mgos_config, hardware), .num_desc = 5},
-  {.type = CONF_TYPE_INT, .key = "input1", .offset = offsetof(struct mgos_config, hardware.input1)},
-  {.type = CONF_TYPE_INT, .key = "input2", .offset = offsetof(struct mgos_config, hardware.input2)},
-  {.type = CONF_TYPE_INT, .key = "input3", .offset = offsetof(struct mgos_config, hardware.input3)},
-  {.type = CONF_TYPE_INT, .key = "relay1", .offset = offsetof(struct mgos_config, hardware.relay1)},
-  {.type = CONF_TYPE_INT, .key = "relay2", .offset = offsetof(struct mgos_config, hardware.relay2)},
+  {.type = CONF_TYPE_OBJECT, .key = "hardware", .offset = offsetof(struct mgos_config, hardware), .num_desc = 9},
+  {.type = CONF_TYPE_OBJECT, .key = "pin", .offset = offsetof(struct mgos_config, hardware.pin), .num_desc = 5},
+  {.type = CONF_TYPE_INT, .key = "voltage", .offset = offsetof(struct mgos_config, hardware.pin.voltage)},
+  {.type = CONF_TYPE_INT, .key = "thermal", .offset = offsetof(struct mgos_config, hardware.pin.thermal)},
+  {.type = CONF_TYPE_INT, .key = "contactor", .offset = offsetof(struct mgos_config, hardware.pin.contactor)},
+  {.type = CONF_TYPE_INT, .key = "on_relay", .offset = offsetof(struct mgos_config, hardware.pin.on_relay)},
+  {.type = CONF_TYPE_INT, .key = "off_relay", .offset = offsetof(struct mgos_config, hardware.pin.off_relay)},
+  {.type = CONF_TYPE_OBJECT, .key = "timer", .offset = offsetof(struct mgos_config, hardware.timer), .num_desc = 2},
+  {.type = CONF_TYPE_INT, .key = "telemetry", .offset = offsetof(struct mgos_config, hardware.timer.telemetry)},
+  {.type = CONF_TYPE_INT, .key = "pulse", .offset = offsetof(struct mgos_config, hardware.timer.pulse)},
 };
 
 const struct mgos_conf_entry *mgos_config_schema() {
@@ -241,6 +278,21 @@ const char *mgos_config_get_device_id(struct mgos_config *cfg) {
 }
 const char *mgos_config_get_device_license(struct mgos_config *cfg) {
   return cfg->device.license;
+}
+const char *mgos_config_get_device_firmware(struct mgos_config *cfg) {
+  return cfg->device.firmware;
+}
+const char *mgos_config_get_device_hardware(struct mgos_config *cfg) {
+  return cfg->device.hardware;
+}
+const char *mgos_config_get_device_ota_url(struct mgos_config *cfg) {
+  return cfg->device.ota_url;
+}
+const char *mgos_config_get_device_new_firmware(struct mgos_config *cfg) {
+  return cfg->device.new_firmware;
+}
+int         mgos_config_get_device_subscription(struct mgos_config *cfg) {
+  return cfg->device.subscription;
 }
 const struct mgos_config_sys *mgos_config_get_sys(struct mgos_config *cfg) {
   return &cfg->sys;
@@ -307,6 +359,39 @@ int         mgos_config_get_i2c_sda_gpio(struct mgos_config *cfg) {
 }
 int         mgos_config_get_i2c_scl_gpio(struct mgos_config *cfg) {
   return cfg->i2c.scl_gpio;
+}
+const struct mgos_config_http *mgos_config_get_http(struct mgos_config *cfg) {
+  return &cfg->http;
+}
+int         mgos_config_get_http_enable(struct mgos_config *cfg) {
+  return cfg->http.enable;
+}
+const char *mgos_config_get_http_listen_addr(struct mgos_config *cfg) {
+  return cfg->http.listen_addr;
+}
+const char *mgos_config_get_http_document_root(struct mgos_config *cfg) {
+  return cfg->http.document_root;
+}
+const char *mgos_config_get_http_ssl_cert(struct mgos_config *cfg) {
+  return cfg->http.ssl_cert;
+}
+const char *mgos_config_get_http_ssl_key(struct mgos_config *cfg) {
+  return cfg->http.ssl_key;
+}
+const char *mgos_config_get_http_ssl_ca_cert(struct mgos_config *cfg) {
+  return cfg->http.ssl_ca_cert;
+}
+const char *mgos_config_get_http_upload_acl(struct mgos_config *cfg) {
+  return cfg->http.upload_acl;
+}
+const char *mgos_config_get_http_hidden_files(struct mgos_config *cfg) {
+  return cfg->http.hidden_files;
+}
+const char *mgos_config_get_http_auth_domain(struct mgos_config *cfg) {
+  return cfg->http.auth_domain;
+}
+const char *mgos_config_get_http_auth_file(struct mgos_config *cfg) {
+  return cfg->http.auth_file;
 }
 const struct mgos_config_mjs *mgos_config_get_mjs(struct mgos_config *cfg) {
   return &cfg->mjs;
@@ -445,6 +530,39 @@ int         mgos_config_get_mqtt1_require_time(struct mgos_config *cfg) {
 }
 int         mgos_config_get_mqtt1_cloud_events(struct mgos_config *cfg) {
   return cfg->mqtt1.cloud_events;
+}
+const struct mgos_config_provision *mgos_config_get_provision(struct mgos_config *cfg) {
+  return &cfg->provision;
+}
+const struct mgos_config_provision_btn *mgos_config_get_provision_btn(struct mgos_config *cfg) {
+  return &cfg->provision.btn;
+}
+int         mgos_config_get_provision_btn_pin(struct mgos_config *cfg) {
+  return cfg->provision.btn.pin;
+}
+int         mgos_config_get_provision_btn_pull_up(struct mgos_config *cfg) {
+  return cfg->provision.btn.pull_up;
+}
+int         mgos_config_get_provision_btn_hold_ms(struct mgos_config *cfg) {
+  return cfg->provision.btn.hold_ms;
+}
+const struct mgos_config_provision_led *mgos_config_get_provision_led(struct mgos_config *cfg) {
+  return &cfg->provision.led;
+}
+int         mgos_config_get_provision_led_pin(struct mgos_config *cfg) {
+  return cfg->provision.led.pin;
+}
+int         mgos_config_get_provision_led_active_high(struct mgos_config *cfg) {
+  return cfg->provision.led.active_high;
+}
+int         mgos_config_get_provision_stable_state(struct mgos_config *cfg) {
+  return cfg->provision.stable_state;
+}
+int         mgos_config_get_provision_timeout(struct mgos_config *cfg) {
+  return cfg->provision.timeout;
+}
+int         mgos_config_get_provision_max_state(struct mgos_config *cfg) {
+  return cfg->provision.max_state;
 }
 const struct mgos_config_rpc *mgos_config_get_rpc(struct mgos_config *cfg) {
   return &cfg->rpc;
@@ -668,6 +786,24 @@ int         mgos_config_get_wifi_sta_cfg_idx(struct mgos_config *cfg) {
 int         mgos_config_get_wifi_sta_connect_timeout(struct mgos_config *cfg) {
   return cfg->wifi.sta_connect_timeout;
 }
+const struct mgos_config_sntp *mgos_config_get_sntp(struct mgos_config *cfg) {
+  return &cfg->sntp;
+}
+int         mgos_config_get_sntp_enable(struct mgos_config *cfg) {
+  return cfg->sntp.enable;
+}
+const char *mgos_config_get_sntp_server(struct mgos_config *cfg) {
+  return cfg->sntp.server;
+}
+int         mgos_config_get_sntp_retry_min(struct mgos_config *cfg) {
+  return cfg->sntp.retry_min;
+}
+int         mgos_config_get_sntp_retry_max(struct mgos_config *cfg) {
+  return cfg->sntp.retry_max;
+}
+int         mgos_config_get_sntp_update_interval(struct mgos_config *cfg) {
+  return cfg->sntp.update_interval;
+}
 const struct mgos_config_board *mgos_config_get_board(struct mgos_config *cfg) {
   return &cfg->board;
 }
@@ -728,20 +864,32 @@ int         mgos_config_get_board_btn3_pull_up(struct mgos_config *cfg) {
 const struct mgos_config_hardware *mgos_config_get_hardware(struct mgos_config *cfg) {
   return &cfg->hardware;
 }
-int         mgos_config_get_hardware_input1(struct mgos_config *cfg) {
-  return cfg->hardware.input1;
+const struct mgos_config_hardware_pin *mgos_config_get_hardware_pin(struct mgos_config *cfg) {
+  return &cfg->hardware.pin;
 }
-int         mgos_config_get_hardware_input2(struct mgos_config *cfg) {
-  return cfg->hardware.input2;
+int         mgos_config_get_hardware_pin_voltage(struct mgos_config *cfg) {
+  return cfg->hardware.pin.voltage;
 }
-int         mgos_config_get_hardware_input3(struct mgos_config *cfg) {
-  return cfg->hardware.input3;
+int         mgos_config_get_hardware_pin_thermal(struct mgos_config *cfg) {
+  return cfg->hardware.pin.thermal;
 }
-int         mgos_config_get_hardware_relay1(struct mgos_config *cfg) {
-  return cfg->hardware.relay1;
+int         mgos_config_get_hardware_pin_contactor(struct mgos_config *cfg) {
+  return cfg->hardware.pin.contactor;
 }
-int         mgos_config_get_hardware_relay2(struct mgos_config *cfg) {
-  return cfg->hardware.relay2;
+int         mgos_config_get_hardware_pin_on_relay(struct mgos_config *cfg) {
+  return cfg->hardware.pin.on_relay;
+}
+int         mgos_config_get_hardware_pin_off_relay(struct mgos_config *cfg) {
+  return cfg->hardware.pin.off_relay;
+}
+const struct mgos_config_hardware_timer *mgos_config_get_hardware_timer(struct mgos_config *cfg) {
+  return &cfg->hardware.timer;
+}
+int         mgos_config_get_hardware_timer_telemetry(struct mgos_config *cfg) {
+  return cfg->hardware.timer.telemetry;
+}
+int         mgos_config_get_hardware_timer_pulse(struct mgos_config *cfg) {
+  return cfg->hardware.timer.pulse;
 }
 /* }}} */
 
@@ -781,6 +929,21 @@ void mgos_config_set_device_id(struct mgos_config *cfg, const char *val) {
 }
 void mgos_config_set_device_license(struct mgos_config *cfg, const char *val) {
   mgos_conf_set_str(&cfg->device.license, val);
+}
+void mgos_config_set_device_firmware(struct mgos_config *cfg, const char *val) {
+  mgos_conf_set_str(&cfg->device.firmware, val);
+}
+void mgos_config_set_device_hardware(struct mgos_config *cfg, const char *val) {
+  mgos_conf_set_str(&cfg->device.hardware, val);
+}
+void mgos_config_set_device_ota_url(struct mgos_config *cfg, const char *val) {
+  mgos_conf_set_str(&cfg->device.ota_url, val);
+}
+void mgos_config_set_device_new_firmware(struct mgos_config *cfg, const char *val) {
+  mgos_conf_set_str(&cfg->device.new_firmware, val);
+}
+void mgos_config_set_device_subscription(struct mgos_config *cfg, int         val) {
+  cfg->device.subscription = val;
 }
 void mgos_config_set_sys_mount_path(struct mgos_config *cfg, const char *val) {
   mgos_conf_set_str(&cfg->sys.mount.path, val);
@@ -835,6 +998,36 @@ void mgos_config_set_i2c_sda_gpio(struct mgos_config *cfg, int         val) {
 }
 void mgos_config_set_i2c_scl_gpio(struct mgos_config *cfg, int         val) {
   cfg->i2c.scl_gpio = val;
+}
+void mgos_config_set_http_enable(struct mgos_config *cfg, int         val) {
+  cfg->http.enable = val;
+}
+void mgos_config_set_http_listen_addr(struct mgos_config *cfg, const char *val) {
+  mgos_conf_set_str(&cfg->http.listen_addr, val);
+}
+void mgos_config_set_http_document_root(struct mgos_config *cfg, const char *val) {
+  mgos_conf_set_str(&cfg->http.document_root, val);
+}
+void mgos_config_set_http_ssl_cert(struct mgos_config *cfg, const char *val) {
+  mgos_conf_set_str(&cfg->http.ssl_cert, val);
+}
+void mgos_config_set_http_ssl_key(struct mgos_config *cfg, const char *val) {
+  mgos_conf_set_str(&cfg->http.ssl_key, val);
+}
+void mgos_config_set_http_ssl_ca_cert(struct mgos_config *cfg, const char *val) {
+  mgos_conf_set_str(&cfg->http.ssl_ca_cert, val);
+}
+void mgos_config_set_http_upload_acl(struct mgos_config *cfg, const char *val) {
+  mgos_conf_set_str(&cfg->http.upload_acl, val);
+}
+void mgos_config_set_http_hidden_files(struct mgos_config *cfg, const char *val) {
+  mgos_conf_set_str(&cfg->http.hidden_files, val);
+}
+void mgos_config_set_http_auth_domain(struct mgos_config *cfg, const char *val) {
+  mgos_conf_set_str(&cfg->http.auth_domain, val);
+}
+void mgos_config_set_http_auth_file(struct mgos_config *cfg, const char *val) {
+  mgos_conf_set_str(&cfg->http.auth_file, val);
 }
 void mgos_config_set_mjs_generate_jsc(struct mgos_config *cfg, int         val) {
   cfg->mjs.generate_jsc = val;
@@ -964,6 +1157,30 @@ void mgos_config_set_mqtt1_require_time(struct mgos_config *cfg, int         val
 }
 void mgos_config_set_mqtt1_cloud_events(struct mgos_config *cfg, int         val) {
   cfg->mqtt1.cloud_events = val;
+}
+void mgos_config_set_provision_btn_pin(struct mgos_config *cfg, int         val) {
+  cfg->provision.btn.pin = val;
+}
+void mgos_config_set_provision_btn_pull_up(struct mgos_config *cfg, int         val) {
+  cfg->provision.btn.pull_up = val;
+}
+void mgos_config_set_provision_btn_hold_ms(struct mgos_config *cfg, int         val) {
+  cfg->provision.btn.hold_ms = val;
+}
+void mgos_config_set_provision_led_pin(struct mgos_config *cfg, int         val) {
+  cfg->provision.led.pin = val;
+}
+void mgos_config_set_provision_led_active_high(struct mgos_config *cfg, int         val) {
+  cfg->provision.led.active_high = val;
+}
+void mgos_config_set_provision_stable_state(struct mgos_config *cfg, int         val) {
+  cfg->provision.stable_state = val;
+}
+void mgos_config_set_provision_timeout(struct mgos_config *cfg, int         val) {
+  cfg->provision.timeout = val;
+}
+void mgos_config_set_provision_max_state(struct mgos_config *cfg, int         val) {
+  cfg->provision.max_state = val;
 }
 void mgos_config_set_rpc_enable(struct mgos_config *cfg, int         val) {
   cfg->rpc.enable = val;
@@ -1166,6 +1383,21 @@ void mgos_config_set_wifi_sta_cfg_idx(struct mgos_config *cfg, int         val) 
 void mgos_config_set_wifi_sta_connect_timeout(struct mgos_config *cfg, int         val) {
   cfg->wifi.sta_connect_timeout = val;
 }
+void mgos_config_set_sntp_enable(struct mgos_config *cfg, int         val) {
+  cfg->sntp.enable = val;
+}
+void mgos_config_set_sntp_server(struct mgos_config *cfg, const char *val) {
+  mgos_conf_set_str(&cfg->sntp.server, val);
+}
+void mgos_config_set_sntp_retry_min(struct mgos_config *cfg, int         val) {
+  cfg->sntp.retry_min = val;
+}
+void mgos_config_set_sntp_retry_max(struct mgos_config *cfg, int         val) {
+  cfg->sntp.retry_max = val;
+}
+void mgos_config_set_sntp_update_interval(struct mgos_config *cfg, int         val) {
+  cfg->sntp.update_interval = val;
+}
 void mgos_config_set_board_led1_pin(struct mgos_config *cfg, int         val) {
   cfg->board.led1.pin = val;
 }
@@ -1202,19 +1434,25 @@ void mgos_config_set_board_btn3_pin(struct mgos_config *cfg, int         val) {
 void mgos_config_set_board_btn3_pull_up(struct mgos_config *cfg, int         val) {
   cfg->board.btn3.pull_up = val;
 }
-void mgos_config_set_hardware_input1(struct mgos_config *cfg, int         val) {
-  cfg->hardware.input1 = val;
+void mgos_config_set_hardware_pin_voltage(struct mgos_config *cfg, int         val) {
+  cfg->hardware.pin.voltage = val;
 }
-void mgos_config_set_hardware_input2(struct mgos_config *cfg, int         val) {
-  cfg->hardware.input2 = val;
+void mgos_config_set_hardware_pin_thermal(struct mgos_config *cfg, int         val) {
+  cfg->hardware.pin.thermal = val;
 }
-void mgos_config_set_hardware_input3(struct mgos_config *cfg, int         val) {
-  cfg->hardware.input3 = val;
+void mgos_config_set_hardware_pin_contactor(struct mgos_config *cfg, int         val) {
+  cfg->hardware.pin.contactor = val;
 }
-void mgos_config_set_hardware_relay1(struct mgos_config *cfg, int         val) {
-  cfg->hardware.relay1 = val;
+void mgos_config_set_hardware_pin_on_relay(struct mgos_config *cfg, int         val) {
+  cfg->hardware.pin.on_relay = val;
 }
-void mgos_config_set_hardware_relay2(struct mgos_config *cfg, int         val) {
-  cfg->hardware.relay2 = val;
+void mgos_config_set_hardware_pin_off_relay(struct mgos_config *cfg, int         val) {
+  cfg->hardware.pin.off_relay = val;
+}
+void mgos_config_set_hardware_timer_telemetry(struct mgos_config *cfg, int         val) {
+  cfg->hardware.timer.telemetry = val;
+}
+void mgos_config_set_hardware_timer_pulse(struct mgos_config *cfg, int         val) {
+  cfg->hardware.timer.pulse = val;
 }
 /* }}} */

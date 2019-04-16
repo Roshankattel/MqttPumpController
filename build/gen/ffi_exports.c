@@ -2,6 +2,7 @@
 
 /*
  * Symbols filtered by the following globs:
+ *  mgos_*s
  */
 
 #include <stdbool.h>
@@ -31,6 +32,8 @@ bool  mg_rpc_send_errorf(void *, int, char *, char *);
 void  mg_send(void *, void *, int);
 void  mg_set_protocol_http_websocket(void *);
 double  mg_time(void);
+int  mgos_adc_enable(int);
+int  mgos_adc_read(int);
 void * mgos_bind(char *, void (*)(void *, int, void *, void *), void *);
 void  mgos_bitbang_write_bits_js(int, int, int, void *, int);
 void  mgos_clear_timer(int);
@@ -40,6 +43,7 @@ int  mgos_conf_value_int(void *, void *);
 char * mgos_conf_value_string_nonnull(void *, void *);
 int  mgos_conf_value_type(void *);
 bool  mgos_config_apply(char *, bool);
+void  mgos_config_reset(int);
 void * mgos_config_schema();
 void * mgos_connect(char *, void (*)(void *, int, void *, void *), void *);
 void * mgos_connect_http(char *, void (*)(void *, int, void *, void *), void *);
@@ -155,6 +159,8 @@ const struct mgos_ffi_export ffi_exports[] = {
   {"mg_send", mg_send},
   {"mg_set_protocol_http_websocket", mg_set_protocol_http_websocket},
   {"mg_time", mg_time},
+  {"mgos_adc_enable", mgos_adc_enable},
+  {"mgos_adc_read", mgos_adc_read},
   {"mgos_bind", mgos_bind},
   {"mgos_bitbang_write_bits_js", mgos_bitbang_write_bits_js},
   {"mgos_clear_timer", mgos_clear_timer},
@@ -164,6 +170,7 @@ const struct mgos_ffi_export ffi_exports[] = {
   {"mgos_conf_value_string_nonnull", mgos_conf_value_string_nonnull},
   {"mgos_conf_value_type", mgos_conf_value_type},
   {"mgos_config_apply", mgos_config_apply},
+  {"mgos_config_reset", mgos_config_reset},
   {"mgos_config_schema", mgos_config_schema},
   {"mgos_connect", mgos_connect},
   {"mgos_connect_http", mgos_connect_http},
@@ -256,4 +263,4 @@ const struct mgos_ffi_export ffi_exports[] = {
   {"sqrt", sqrt},
   {"strdup", strdup},
 };
-const int ffi_exports_cnt = 122;
+const int ffi_exports_cnt = 125;

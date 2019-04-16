@@ -16,6 +16,7 @@
  */
 
 #include "mgos.h"
+#include "mgos_sys_config.h"
 
 enum mgos_app_init_result mgos_app_init(void) {
   LOG(LL_INFO, ("Hi there"));

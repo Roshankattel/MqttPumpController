@@ -1,5 +1,546 @@
 <html>
-<body>
-  <h1>Welcome to the empty project</h1>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /* Copyright 2014 Owen Versteeg; MIT licensed */
+    body,
+    textarea,
+    input,
+    select {
+      background: 0;
+      border-radius: 0;
+      font: 16px sans-serif;
+      margin: 0
+    }
+
+    .smooth {
+      transition: all .2s
+    }
+
+    .btn,
+    .nav a {
+      text-decoration: none
+    }
+
+    .container {
+      margin: 0 20px;
+      width: auto
+    }
+
+    label>* {
+      display: inline
+    }
+
+    form>* {
+      display: block;
+      margin-bottom: 10px
+    }
+
+    .btn {
+      background: #999;
+      border-radius: 6px;
+      border: 0;
+      color: #fff;
+      cursor: pointer;
+      display: inline-block;
+      margin: 2px 0;
+      padding: 12px 30px 14px
+    }
+
+    .btn:hover {
+      background: #888
+    }
+
+    .btn:active,
+    .btn:focus {
+      background: #777
+    }
+
+    .btn-a {
+      background: #0ae
+    }
+
+    .btn-a:hover {
+      background: #09d
+    }
+
+    .btn-a:active,
+    .btn-a:focus {
+      background: #08b
+    }
+
+    .btn-b {
+      background: #3c5
+    }
+
+    .btn-b:hover {
+      background: #2b4
+    }
+
+    .btn-b:active,
+    .btn-b:focus {
+      background: #2a4
+    }
+
+    .btn-c {
+      background: #d33
+    }
+
+    .btn-c:hover {
+      background: #c22
+    }
+
+    .btn-c:active,
+    .btn-c:focus {
+      background: #b22
+    }
+
+    .btn-sm {
+      border-radius: 4px;
+      padding: 10px 14px 11px
+    }
+
+    .row {
+      margin: 1% 0;
+      overflow: auto
+    }
+
+    .col {
+      float: left
+    }
+
+    .table,
+    .c12 {
+      width: 100%
+    }
+
+    .c11 {
+      width: 91.66%
+    }
+
+    .c10 {
+      width: 83.33%
+    }
+
+    .c9 {
+      width: 75%
+    }
+
+    .c8 {
+      width: 66.66%
+    }
+
+    .c7 {
+      width: 58.33%
+    }
+
+    .c6 {
+      width: 50%
+    }
+
+    .c5 {
+      width: 41.66%
+    }
+
+    .c4 {
+      width: 33.33%
+    }
+
+    .c3 {
+      width: 25%
+    }
+
+    .c2 {
+      width: 16.66%
+    }
+
+    .c1 {
+      width: 8.33%
+    }
+
+    h1 {
+      font-size: 3em
+    }
+
+    .btn,
+    h2 {
+      font-size: 2em
+    }
+
+    .ico {
+      font: 33px Arial Unicode MS, Lucida Sans Unicode
+    }
+
+    .addon,
+    .btn-sm,
+    .nav,
+    textarea,
+    input,
+    select {
+      outline: 0;
+      font-size: 14px
+    }
+
+    textarea,
+    input,
+    select {
+      padding: 8px;
+      border: 1px solid #ccc
+    }
+
+    textarea:focus,
+    input:focus,
+    select:focus {
+      border-color: #5ab
+    }
+
+    textarea,
+    input[type=text] {
+      -webkit-appearance: none;
+      width: 13em
+    }
+
+    .addon {
+      padding: 8px 12px;
+      box-shadow: 0 0 0 1px #ccc
+    }
+
+    .nav,
+    .nav .current,
+    .nav a:hover {
+      background: #000;
+      color: #fff
+    }
+
+    .nav {
+      height: 24px;
+      padding: 11px 0 15px
+    }
+
+    .nav a {
+      color: #aaa;
+      padding-right: 1em;
+      position: relative;
+      top: -1px
+    }
+
+    .nav .pagename {
+      font-size: 22px;
+      top: 1px
+    }
+
+    .btn.btn-close {
+      background: #000;
+      float: right;
+      font-size: 25px;
+      margin: -54px 7px;
+      display: none
+    }
+
+    @media(min-width:1310px) {
+      .container {
+        margin: auto;
+        width: 1270px
+      }
+    }
+
+    @media(max-width:870px) {
+      .row .col {
+        width: 100%
+      }
+    }
+
+    @media(max-width:500px) {
+      .btn.btn-close {
+        display: block
+      }
+
+      .nav {
+        overflow: hidden
+      }
+
+      .pagename {
+        margin-top: -11px
+      }
+
+      .nav:active,
+      .nav:focus {
+        height: auto
+      }
+
+      .nav div:before {
+        background: #000;
+        border-bottom: 10px double;
+        border-top: 3px solid;
+        content: '';
+        float: right;
+        height: 4px;
+        position: relative;
+        right: 3px;
+        top: 14px;
+        width: 20px
+      }
+
+      .nav a {
+        padding: .5em 0;
+        display: block;
+        width: 50%
+      }
+    }
+
+    .table th,
+    .table td {
+      padding: .5em;
+      text-align: left
+    }
+
+    .table tbody>:nth-child(2n-1) {
+      background: #ddd
+    }
+
+    .msg {
+      padding: 1.5em;
+      background: #def;
+      border-left: 5px solid #59d
+    }
+
+    .hero {
+      background: #eee;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 1em;
+    }
+
+    .hero h1 {
+      margin-top: 0;
+      margin-bottom: 0.3em;
+    }
+
+    .c4 {
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .c4 h3 {
+      margin-top: 0;
+    }
+
+    .c4 a {
+      margin-top: 10px;
+      display: inline-block;
+    }
+
+    .form-control {
+      margin: 0.5em 0;
+    }
+
+    .form label {
+      min-width: 8em;
+      display: inline-block;
+    }
+
+    #result {
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+      min-height: 7em;
+      white-space: pre;
+      padding: 0.5em;
+      overflow: auto;
+    }
+
+    .vertical-menu {
+      width: 200px;
+      height: 300px;
+      overflow-y: auto;
+    }
+
+    .vertical-menu div {
+      background-color: #eee;
+      color: black;
+      display: block;
+      padding: 12px;
+      text-decoration: none;
+    }
+
+    .vertical-menu div:hover {
+      background-color: #ccc;
+    }
+
+    .vertical-menu div.active {
+      background-color: #4CAF50;
+      color: white;
+    }
+  </style>
+  <script src="zepto.min.js"></script>
+
+</head>
+
+<body onload="scanfunction()">
+  <nav class="nav" tabindex="-1" onclick="this.focus()">
+    <div class="container">
+      <a class="pagename current">Setup WiFi Button</a>
+    </div>
+  </nav>
+
+  <div id="dynamic-list" class="vertical-menu">
+  </div>
+
+  <div class="row form">
+    <div class="col c4">
+      <div class="form-control">
+        <label for="ssid">WiFi Network:</label>
+        <input type="text" class="smooth" id="ssid" name="ssid" placeholder="Type WiFi network...">
+      </div>
+      <div class="form-control">
+        <label for="pass">WiFi Password:</label>
+        <input type="password" class="smooth" id="pass" name="pass" placeholder="Type WiFi password...">
+      </div>
+      <div class="form-control">
+        <label for="server">Server:</label>
+        <input type="text" class="smooth" id="server" name="server" placeholder="Type Server IP...">
+      </div>
+      <div class="form-control">
+        <label for="IP">IP:</label>
+        <input type="text" class="smooth" id="IP" name="IP" placeholder="Type IP...">
+      </div>
+      <div class="form-control">
+        <label for="gateway">Gateway:</label>
+        <input type="text" class="smooth" id="gateway" name="gateway" placeholder="Type Gateway...">
+      </div>
+      <div class="form-control">
+        <label for="subnet">Subnet:</label>
+        <input type="text" class="smooth" id="subnet" name="subnet" placeholder="Type Subnet...">
+      </div>
+      <div class="form-control">
+        <label for="name">Acess Token:</label>
+        <input type="text" class="smooth" id="acesstoken" name="acesstoken" placeholder="Type Acess Token...">
+      </div>
+      <div class="form-control">
+        <label for="sgroup">MQTT Server:</label>
+        <input type="text" class="smooth" id="MQTTserver" name="MQTTserver" placeholder="Type MQTTserver...">
+      </div>
+      <div class="form-control">
+        <label for="ontime">Update Interval:</label>
+        <input type="number" class="smooth" id="UI" name="UI" placeholder="Type Update interval in millisec...">
+      </div>
+      <div class="form-control">
+        <label for="retry">Pulse Duration</label>
+        <input type="number" class="smooth" id="PD" name="PD" placeholder="Pulse Duration in millisecs...">
+      </div>
+      <div class="form-control"><button href="#" class="btn btn-sm btn-c" id="scan">Scan WiFi</button></div>
+      <div class="form-control"><button href="#" class="btn btn-sm btn-c" id="save">Save settings</button></div>
+    </div>
+    <div class="col c8">
+      <div id="result" style="display: none;"></div>
+    </div>
+  </div>
+  </div>
+
+  <script>
+    var size = 0;
+    function scanfunction() {
+      console.log("SCAN!!");
+      log('Calling /rpc/Wifi.Scan  ...');
+      $.ajax({
+        url: '/rpc/Wifi.Scan',
+        data: JSON.stringify({ "key": "app" }),
+        type: 'POST',
+        success: function (data) {
+          log('Result: ' + JSON.stringify(data));
+          console.log(data);
+          console.log(data.length);
+          size = data.length;
+          data.forEach(function (item, index, array) {
+            console.log(item, index);
+
+            // Your existing code unmodified...
+            var iDiv = document.getElementById('dynamic-list');
+
+            // Now create and append to iDiv
+            var innerDiv = document.createElement('div');
+            innerDiv.className = item.ssid;
+            innerDiv.innerHTML = item.ssid + " " + item.rssi;
+            innerDiv.addEventListener("click", function () {
+              document.getElementById('ssid').value = item.ssid;
+            });
+            // The variable iDiv is still good... Just append to it.
+            iDiv.appendChild(innerDiv);
+          })
+        }
+      }
+      )
+    }
+
+    function removeItem() {
+      var ul = document.getElementById("dynamic-list");
+      for (i = 0; i <= size; i++) {
+        ul.removeChild(ul.childNodes[0]);
+      }
+    }
+
+
+    var log = function (msg) {
+      $('<span/>').html(msg + '\n').appendTo('#result')
+    };
+
+    log('Calling /rpc/Config.Get ...');
+    $.ajax({
+      url: '/rpc/Config.Get',
+      data: JSON.stringify({ "key": "app" }),
+      type: 'POST',
+      success: function (data) {
+        log('Result: ' + JSON.stringify(data));
+        $('#server').val(data.server);
+      },
+    });
+
+    $('#save').on('click', function () {
+      console.log("SAVE!!");
+      log('Calling /rpc/Config.Set  ...');
+      $.ajax({
+        url: '/rpc/Config.Set',
+        data: JSON.stringify({
+          config: {
+            wifi: {
+              sta: {
+                enable: true, ssid: $('#ssid').val(),
+                pass: $('#pass').val(),
+                ip: $('#IP').val(),
+                netmask: $('#gateway').val(),
+                nameserver: "8.8.8.8"
+              }, ap: { enable: false }
+            }, app: {
+              server: $('#server').val(),
+            },
+            hardware: {
+              timer: {
+                telemetry: parseInt($('#UI').val()),
+                pulse: parseInt($('#PD').val())
+              }
+            },
+          mqtt:{
+            server:$('MQTTserver').val(),
+            user:$('acesstoken').val()
+          }
+          }
+        }),
+        type: 'POST',
+        success: function (data) {
+          log('Success. Saving and rebooting ...');
+          $.ajax({ url: '/rpc/Config.Save', type: 'POST', data: JSON.stringify({ "reboot": true }) });
+        },
+      })
+    });
+
+    $('#scan').on('click', function () {
+      removeItem();
+      scanfunction();
+    });
+  </script>
+
 </body>
+
 </html>

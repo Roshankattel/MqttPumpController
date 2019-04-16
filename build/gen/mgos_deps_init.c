@@ -13,16 +13,21 @@ extern bool mgos_vfs_common_init(void);
 extern bool mgos_vfs_dev_part_init(void);
 extern bool mgos_vfs_fs_spiffs_init(void);
 extern bool mgos_core_init(void);
+extern bool mgos_adc_init(void);
 extern bool mgos_i2c_init(void);
 extern bool mgos_atca_init(void);
+extern bool mgos_wifi_init(void);
+extern bool mgos_http_server_init(void);
 extern bool mgos_mbedtls_init(void);
 extern bool mgos_mjs_init(void);
 extern bool mgos_mqtt_init(void);
+extern bool mgos_provision_init(void);
 extern bool mgos_rpc_common_init(void);
 extern bool mgos_rpc_service_config_init(void);
 extern bool mgos_rpc_service_fs_init(void);
+extern bool mgos_rpc_service_wifi_init(void);
 extern bool mgos_rpc_uart_init(void);
-extern bool mgos_wifi_init(void);
+extern bool mgos_sntp_init(void);
 
 static const struct lib_descr {
   const char *title;
@@ -44,11 +49,20 @@ static const struct lib_descr {
     // "core". deps: [ "mongoose" "vfs-common" "vfs-dev-part" "vfs-fs-spiffs" ]
     {.title = "core", .init = mgos_core_init},
 
+    // "adc". deps: [ "core" ]
+    {.title = "adc", .init = mgos_adc_init},
+
     // "i2c". deps: [ "core" ]
     {.title = "i2c", .init = mgos_i2c_init},
 
     // "atca". deps: [ "i2c" ]
     {.title = "atca", .init = mgos_atca_init},
+
+    // "wifi". deps: [ "core" ]
+    {.title = "wifi", .init = mgos_wifi_init},
+
+    // "http-server". deps: [ "atca" "core" "wifi" ]
+    {.title = "http-server", .init = mgos_http_server_init},
 
     // "mbedtls". deps: [ ]
     {.title = "mbedtls", .init = mgos_mbedtls_init},
@@ -59,7 +73,10 @@ static const struct lib_descr {
     // "mqtt". deps: [ "core" ]
     {.title = "mqtt", .init = mgos_mqtt_init},
 
-    // "rpc-common". deps: [ "core" "mongoose" ]
+    // "provision". deps: [ "core" ]
+    {.title = "provision", .init = mgos_provision_init},
+
+    // "rpc-common". deps: [ "core" "http-server" "mongoose" ]
     {.title = "rpc-common", .init = mgos_rpc_common_init},
 
     // "rpc-service-config". deps: [ "core" "rpc-common" ]
@@ -68,11 +85,14 @@ static const struct lib_descr {
     // "rpc-service-fs". deps: [ "core" "rpc-common" ]
     {.title = "rpc-service-fs", .init = mgos_rpc_service_fs_init},
 
+    // "rpc-service-wifi". deps: [ "core" "rpc-common" "wifi" ]
+    {.title = "rpc-service-wifi", .init = mgos_rpc_service_wifi_init},
+
     // "rpc-uart". deps: [ "core" "rpc-common" ]
     {.title = "rpc-uart", .init = mgos_rpc_uart_init},
 
-    // "wifi". deps: [ "core" ]
-    {.title = "wifi", .init = mgos_wifi_init},
+    // "sntp". deps: [ "core" ]
+    {.title = "sntp", .init = mgos_sntp_init},
 
 };
 

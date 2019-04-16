@@ -5,7 +5,11 @@
   "mbedtls_level": 1
  },
  "device": {
-  "id": "esp8266_??????"
+  "id": "esp8266_??????",
+  "firmware": "1.2",
+  "hardware": "pump",
+  "ota_url": "www.zyx.com",
+  "new_firmware": "55555"
  },
  "sys": {
   "wdt_timeout": 30,
@@ -19,6 +23,12 @@
   "freq": 100000,
   "sda_gpio": 12,
   "scl_gpio": 14
+ },
+ "http": {
+  "enable": true,
+  "listen_addr": "80",
+  "document_root": "/",
+  "upload_acl": "*"
  },
  "mjs": {
   "generate_jsc": true
@@ -49,6 +59,17 @@
   "recv_mbuf_limit": 3072,
   "cloud_events": true
  },
+ "provision": {
+  "btn": {
+   "pull_up": true,
+   "hold_ms": 5000
+  },
+  "led": {
+   "pin": 16
+  },
+  "stable_state": 3,
+  "timeout": 3000
+ },
  "rpc": {
   "enable": true,
   "max_frame_size": 4096,
@@ -62,8 +83,8 @@
  "wifi": {
   "ap": {
    "enable": true,
-   "ssid": "Mongoose_??????",
-   "pass": "Mongoose",
+   "ssid": "Preesu_??????",
+   "pass": "12345678",
    "channel": 6,
    "max_connections": 10,
    "ip": "192.168.4.1",
@@ -74,20 +95,14 @@
    "trigger_on_gpio": -1,
    "keep_enabled": true
   },
-  "sta": {
-   "enable": true,
-   "ssid": "smps",
-   "pass": "432FACC99A"
-  },
-  "sta1": {
-   "ssid": "smps",
-   "pass": "432FACC99A"
-  },
-  "sta2": {
-   "ssid": "smps",
-   "pass": "432FACC99A"
-  },
   "sta_connect_timeout": 30
+ },
+ "sntp": {
+  "enable": true,
+  "server": "time.google.com",
+  "retry_min": 1,
+  "retry_max": 30,
+  "update_interval": 7200
  },
  "board": {
   "led1": {
@@ -112,10 +127,16 @@
   }
  },
  "hardware": {
-  "input1": 12,
-  "input2": 13,
-  "input3": 14,
-  "relay1": 4,
-  "relay2": 5
+  "pin": {
+   "voltage": 12,
+   "thermal": 13,
+   "contactor": 14,
+   "on_relay": 4,
+   "off_relay": 5
+  },
+  "timer": {
+   "telemetry": 300000,
+   "pulse": 1000
+  }
  }
 }

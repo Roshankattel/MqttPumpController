@@ -1,6 +1,6 @@
 {
   "arch": "esp8266",
   "platform": "esp8266",
-  "app_name": "mqtt-3interrupt-2relay",
-  "build_time_ms": 12945
+  "app_name": "mqtt_pump",
+  "build_time_ms": 14595
 }
