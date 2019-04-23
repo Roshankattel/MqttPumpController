@@ -45,8 +45,10 @@ ffi_symbols:
 # level is 2 by default. For this firmware we can override it to 3:
 #
 config_schema:
-
+  # - ["conf_acl", "wifi.ap.enable,wifi.sta.*,device.*,debug.level,hardware.timer.*"]
   - ["mqtt.enable", true]
+  # - ["mqtt.user", "tGwrkFHSaCrWYyjuWarl"]                                
+  # - ["mqtt.server", "192.168.86.24:1883"]
   - ["mqtt.user", "lemfpvyz"]                   
   - ["mqtt.pass", "jy0jZ7fTyjZ1"]                 
   - ["mqtt.server", "m16.cloudmqtt.com:15570"]

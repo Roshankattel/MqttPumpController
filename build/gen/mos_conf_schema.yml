@@ -495,11 +495,9 @@
 - - mqtt.enable
   - true
 - - mqtt.user
-  - lemfpvyz
-- - mqtt.pass
-  - jy0jZ7fTyjZ1
+  - tGwrkFHSaCrWYyjuWarl
 - - mqtt.server
-  - m16.cloudmqtt.com:15570
+  - 192.168.86.24:1883
 - - wifi.sta.enable
   - false
 - - wifi.ap.enable

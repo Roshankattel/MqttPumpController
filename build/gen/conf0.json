@@ -35,9 +35,8 @@
  },
  "mqtt": {
   "enable": true,
-  "server": "m16.cloudmqtt.com:15570",
-  "user": "lemfpvyz",
-  "pass": "jy0jZ7fTyjZ1",
+  "server": "192.168.86.24:1883",
+  "user": "tGwrkFHSaCrWYyjuWarl",
   "reconnect_timeout_min": 2.0,
   "reconnect_timeout_max": 60.0,
   "clean_session": true,
@@ -48,9 +47,8 @@
  },
  "mqtt1": {
   "enable": true,
-  "server": "m16.cloudmqtt.com:15570",
-  "user": "lemfpvyz",
-  "pass": "jy0jZ7fTyjZ1",
+  "server": "192.168.86.24:1883",
+  "user": "tGwrkFHSaCrWYyjuWarl",
   "reconnect_timeout_min": 2.0,
   "reconnect_timeout_max": 60.0,
   "clean_session": true,

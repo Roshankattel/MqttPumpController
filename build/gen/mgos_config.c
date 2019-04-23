@@ -1,7 +1,7 @@
 /* clang-format off */
 /*
  * Generated file - do not edit.
- * Command: /mongoose-os/fw/tools/gen_sys_config.py --c_name=mgos_config --c_global_name=mgos_sys_config --dest_dir=/data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/build/gen/ /mongoose-os/fw/src/mgos_debug_udp_config.yaml /mongoose-os/fw/src/mgos_sys_config.yaml /mongoose-os/fw/platforms/esp8266/src/esp_sys_config.yaml /data/fwbuild-volumes/2.12.1/apps/mqtt_pump/esp8266/build_contexts/build_ctx_217093085/build/gen/mos_conf_schema.yml
+ * Command: /mongoose-os/fw/tools/gen_sys_config.py --c_name=mgos_config --c_global_name=mgos_sys_config --dest_dir=/data/fwbuild-volumes/2.12.1/apps/mqtt-pump-with-mac/esp8266/build_contexts/build_ctx_903793406/build/gen/ /mongoose-os/fw/src/mgos_debug_udp_config.yaml /mongoose-os/fw/src/mgos_sys_config.yaml /mongoose-os/fw/platforms/esp8266/src/esp_sys_config.yaml /data/fwbuild-volumes/2.12.1/apps/mqtt-pump-with-mac/esp8266/build_contexts/build_ctx_903793406/build/gen/mos_conf_schema.yml
  */
 
 #include <stddef.h>

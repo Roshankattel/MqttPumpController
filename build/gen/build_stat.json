@@ -1,6 +1,6 @@
 {
   "arch": "esp8266",
   "platform": "esp8266",
-  "app_name": "mqtt_pump",
-  "build_time_ms": 14595
+  "app_name": "mqtt-pump-with-mac",
+  "build_time_ms": 34922
 }

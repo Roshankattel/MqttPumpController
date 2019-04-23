@@ -340,79 +340,93 @@
       display: inline-block;
     }
 
-    #result {
-      background-color: #f0f0f0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
-      min-height: 7em;
-      white-space: pre;
-      padding: 0.5em;
-      overflow: auto;
-    }
-
-    .vertical-menu {
-      width: 200px;
-      height: 300px;
-      overflow-y: auto;
-    }
-
-    .vertical-menu div {
-      background-color: #eee;
-      color: black;
-      display: block;
-      padding: 12px;
-      text-decoration: none;
-    }
-
-    .vertical-menu div:hover {
-      background-color: #ccc;
-    }
-
-    .vertical-menu div.active {
-      background-color: #4CAF50;
+    .dropbtn {
+      background-color: #3498DB;
       color: white;
+      padding: 10px;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .dropbtn:hover,
+    .dropbtn:focus {
+      background-color: #2980B9;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f1f1f1;
+      min-width: 160px;
+      max-height: 300px;
+      overflow: auto;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 8px 8px;
+      text-decoration: none;
+      display: block;
+      font-size: 14px;
+    }
+
+    .dropdown a:hover {
+      background-color: #ddd;
+    }
+
+    .show {
+      display: block;
     }
   </style>
   <script src="zepto.min.js"></script>
 
 </head>
 
-<body onload="scanfunction()">
+<body onload="scanWifi();">
   <nav class="nav" tabindex="-1" onclick="this.focus()">
     <div class="container">
-      <a class="pagename current">Setup WiFi Button</a>
+      <a class="pagename current">Setup Device</a>
     </div>
   </nav>
-
-  <div id="dynamic-list" class="vertical-menu">
-  </div>
 
   <div class="row form">
     <div class="col c4">
       <div class="form-control">
+        <label for="mac">MAC Address:</label>
+        <input type="text" class="smooth" id="mac" name="mac" disabled>
+      </div>
+      <div class="form-control">
         <label for="ssid">WiFi Network:</label>
         <input type="text" class="smooth" id="ssid" name="ssid" placeholder="Type WiFi network...">
+        <div class="dropdown">
+          <button onclick="listWifi()" class="dropbtn">Wifi</button>
+          <div id="dynamic-list" class="dropdown-content">
+          </div>
+        </div>
       </div>
       <div class="form-control">
         <label for="pass">WiFi Password:</label>
         <input type="password" class="smooth" id="pass" name="pass" placeholder="Type WiFi password...">
       </div>
       <div class="form-control">
-        <label for="server">Server:</label>
-        <input type="text" class="smooth" id="server" name="server" placeholder="Type Server IP...">
-      </div>
-      <div class="form-control">
-        <label for="IP">IP:</label>
-        <input type="text" class="smooth" id="IP" name="IP" placeholder="Type IP...">
+        <label for="IP">IP Address:</label>
+        <input type="text" class="smooth" id="ip" name="ip" placeholder="192.168.0.1">
       </div>
       <div class="form-control">
         <label for="gateway">Gateway:</label>
-        <input type="text" class="smooth" id="gateway" name="gateway" placeholder="Type Gateway...">
+        <input type="text" class="smooth" id="gateway" name="gateway" placeholder="192.168.0.1">
       </div>
       <div class="form-control">
-        <label for="subnet">Subnet:</label>
-        <input type="text" class="smooth" id="subnet" name="subnet" placeholder="Type Subnet...">
+        <label for="netmask">Netmask:</label>
+        <input type="text" class="smooth" id="netmask" name="netmask" placeholder="Type Netmask">
       </div>
       <div class="form-control">
         <label for="name">Acess Token:</label>
@@ -433,36 +447,47 @@
       <div class="form-control"><button href="#" class="btn btn-sm btn-c" id="scan">Scan WiFi</button></div>
       <div class="form-control"><button href="#" class="btn btn-sm btn-c" id="save">Save settings</button></div>
     </div>
-    <div class="col c8">
-      <div id="result" style="display: none;"></div>
-    </div>
   </div>
   </div>
 
   <script>
-    var size = 0;
-    function scanfunction() {
-      console.log("SCAN!!");
-      log('Calling /rpc/Wifi.Scan  ...');
+    /* When the user clicks on the button, 
+    toggle between hiding and showing the dropdown content */
+    function listWifi() {
+      document.getElementById("dynamic-list").classList.toggle("show");
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function (event) {
+      if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+
+    function scanWifi() {
+      console.log("Scan WiFi");
       $.ajax({
         url: '/rpc/Wifi.Scan',
         data: JSON.stringify({ "key": "app" }),
         type: 'POST',
         success: function (data) {
-          log('Result: ' + JSON.stringify(data));
+          console.log("Wifi ssid");
           console.log(data);
-          console.log(data.length);
-          size = data.length;
           data.forEach(function (item, index, array) {
-            console.log(item, index);
-
             // Your existing code unmodified...
             var iDiv = document.getElementById('dynamic-list');
 
             // Now create and append to iDiv
-            var innerDiv = document.createElement('div');
+            var innerDiv = document.createElement('a');
             innerDiv.className = item.ssid;
-            innerDiv.innerHTML = item.ssid + " " + item.rssi;
+            innerDiv.innerHTML = item.ssid + " : " + item.rssi;
             innerDiv.addEventListener("click", function () {
               document.getElementById('ssid').value = item.ssid;
             });
@@ -475,44 +500,67 @@
     }
 
     function removeItem() {
-      var ul = document.getElementById("dynamic-list");
-      for (i = 0; i <= size; i++) {
-        ul.removeChild(ul.childNodes[0]);
+      console.log("Clear list")
+      var wifiList = document.getElementById("dynamic-list");
+      while (wifiList.firstChild) {
+        wifiList.removeChild(wifiList.firstChild);
       }
     }
 
-
-    var log = function (msg) {
-      $('<span/>').html(msg + '\n').appendTo('#result')
-    };
-
-    log('Calling /rpc/Config.Get ...');
     $.ajax({
       url: '/rpc/Config.Get',
-      data: JSON.stringify({ "key": "app" }),
+      data: JSON.stringify({ "key": "mqtt" }),
       type: 'POST',
       success: function (data) {
-        log('Result: ' + JSON.stringify(data));
-        $('#server').val(data.server);
+        console.log("Get App")
+        console.log(data)
+        $('#MQTTserver').val(data.server);
+        $('#acesstoken').val(data.user);
+      },
+    });
+
+    $.ajax({
+      url: '/rpc/Config.Get',
+      data: JSON.stringify({ "key": "hardware" }),
+      type: 'POST',
+      success: function (data) {
+        console.log("Get Hardware")
+        console.log(data)
+        $('#UI').val(data.timer.telemetry);
+        $('#PD').val(data.timer.pulse);
+      },
+    });
+
+    $.ajax({
+      url: '/rpc/Config.GetMac',
+      data: JSON.stringify({ "key": "macAddress" }),
+      type: 'POST',
+      success: function (data) {
+        console.log("Get Mac")
+        console.log(data)
+        $('#mac').val(data.macAddress);
       },
     });
 
     $('#save').on('click', function () {
-      console.log("SAVE!!");
-      log('Calling /rpc/Config.Set  ...');
+      console.log("Set config");
       $.ajax({
         url: '/rpc/Config.Set',
         data: JSON.stringify({
-          config: {
+            config: {
             wifi: {
               sta: {
-                enable: true, ssid: $('#ssid').val(),
+                enable: true, 
+                ssid: $('#ssid').val(),
                 pass: $('#pass').val(),
                 ip: $('#IP').val(),
-                netmask: $('#gateway').val(),
+                gateway: $('#gateway').val(),
+                netmask: $('#netmask').val(),
                 nameserver: "8.8.8.8"
-              }, ap: { enable: false }
-            }, app: {
+              },
+              ap: { enable: false }
+            },
+            app: {
               server: $('#server').val(),
             },
             hardware: {
@@ -521,15 +569,15 @@
                 pulse: parseInt($('#PD').val())
               }
             },
-          mqtt:{
-            server:$('MQTTserver').val(),
-            user:$('acesstoken').val()
-          }
+            mqtt: {
+              server: $('#MQTTserver').val(),
+              user: $('#acesstoken').val()
+            }
           }
         }),
         type: 'POST',
         success: function (data) {
-          log('Success. Saving and rebooting ...');
+          console.log("Save config");
           $.ajax({ url: '/rpc/Config.Save', type: 'POST', data: JSON.stringify({ "reboot": true }) });
         },
       })
@@ -537,7 +585,7 @@
 
     $('#scan').on('click', function () {
       removeItem();
-      scanfunction();
+      scanWifi();
     });
   </script>
 

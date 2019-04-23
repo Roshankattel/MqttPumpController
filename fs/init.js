@@ -71,7 +71,7 @@ MQTT.sub('v1/devices/me/attributes', function (conn, topic, msg) {
 MQTT.sub('v1/devices/me/rpc/request/+', function (conn, topic, msg) {
   print('RPC request from server:', topic, "message:", msg);
   let request = JSON.parse(msg);
-  if (request.method === 'setcontactor') {
+  if (request.method === 'setContactor') {
     if (request.params === 'on') {
       pulse(onPin);
     } else if (request.params === 'off') {
@@ -81,17 +81,17 @@ MQTT.sub('v1/devices/me/rpc/request/+', function (conn, topic, msg) {
   else if (request.method === 'utility') {
     if (request.params === 'restart') {
       Sys.reboot(0);
-    } else if (request.params === 'factoryreset') {
+    } else if (request.params === 'factoryReset') {
       f(9);
       Sys.reboot(0);
     }
   }
 
-  else if (request.method === 'setconfig') {
+  else if (request.method === 'setConfig') {
     Cfg.set(request.params);
-  }
+   }
 
-  else if (request.method === 'getconfig') {
+  else if (request.method === 'getConfig') {
     let response = {};
     let temp =topic.slice(26);
     let reptopic = 'v1/devices/me/rpc/response/'+temp;
